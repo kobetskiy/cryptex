@@ -1,0 +1,1 @@
+{"routes":[{"name":null,"pathParams":[],"pageType":{"import":"package:cryptex/features/home/view/home_screen.dart","name":"HomeScreen","isNullable":false,"isRecordType":false},"className":"HomeScreen","parameters":[],"hasWrappedRoute":false,"hasConstConstructor":true,"deferredLoading":null}],"inputPath":"lib/features/home/view/home_screen.dart","inputHash":0}

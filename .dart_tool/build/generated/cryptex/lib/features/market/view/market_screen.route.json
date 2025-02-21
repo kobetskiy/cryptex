@@ -1,0 +1,1 @@
+{"routes":[{"name":null,"pathParams":[],"pageType":{"import":"package:cryptex/features/market/view/market_screen.dart","name":"MarketScreen","isNullable":false,"isRecordType":false},"className":"MarketScreen","parameters":[],"hasWrappedRoute":false,"hasConstConstructor":true,"deferredLoading":null}],"inputPath":"lib/features/market/view/market_screen.dart","inputHash":0}
