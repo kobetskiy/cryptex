@@ -13,7 +13,7 @@ class AppScreen extends StatelessWidget {
       routes: const [
         HomeRoute(),
         MarketRoute(),
-        ProfileRoute(),
+        AssetsRoute(),
       ],
       bottomNavigationBuilder: (context, tabsRouter) => Theme(
         data: ThemeData(splashColor: Colors.transparent),

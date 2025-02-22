@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cryptex/app/app_screen.dart';
 import 'package:cryptex/features/home/view/view.dart';
 import 'package:cryptex/features/market/view/view.dart';
-import 'package:cryptex/features/profile/view/profile_screen.dart';
+import 'package:cryptex/features/assets/view/assets_screen.dart';
 
 part 'router.gr.dart';
 
@@ -16,7 +16,7 @@ class AppRouter extends RootStackRouter {
       children: [
         AutoRoute(page: HomeRoute.page, path: 'home'),
         AutoRoute(page: MarketRoute.page, path: 'market'),
-        AutoRoute(page: ProfileRoute.page, path: 'profile'),
+        AutoRoute(page: AssetsRoute.page, path: 'assets'),
       ],
     ),
   ];

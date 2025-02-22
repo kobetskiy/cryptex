@@ -21,5 +21,11 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'uk';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
+    "myAssets": MessageLookupByLibrary.simpleMessage("Мої активи"),
+    "send": MessageLookupByLibrary.simpleMessage("Send"),
+    "totalAssets": MessageLookupByLibrary.simpleMessage("Загальні активи"),
+    "withdraw": MessageLookupByLibrary.simpleMessage("Withdraw"),
+  };
 }

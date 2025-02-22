@@ -1,1 +1,7 @@
-{}
+{
+  "myAssets": "My Assets",
+  "totalAssets": "Total Assets",
+  "deposit": "Deposit",
+  "withdraw": "Withdraw",
+  "send": "Send"
+}

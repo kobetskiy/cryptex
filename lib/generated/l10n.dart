@@ -54,6 +54,36 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
+  /// `My Assets`
+  String get myAssets {
+    return Intl.message('My Assets', name: 'myAssets', desc: '', args: []);
+  }
+
+  /// `Total Assets`
+  String get totalAssets {
+    return Intl.message(
+      'Total Assets',
+      name: 'totalAssets',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit`
+  String get deposit {
+    return Intl.message('Deposit', name: 'deposit', desc: '', args: []);
+  }
+
+  /// `Withdraw`
+  String get withdraw {
+    return Intl.message('Withdraw', name: 'withdraw', desc: '', args: []);
+  }
+
+  /// `Send`
+  String get send {
+    return Intl.message('Send', name: 'send', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

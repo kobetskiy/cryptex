@@ -27,6 +27,22 @@ class AppRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [AssetsScreen]
+class AssetsRoute extends PageRouteInfo<void> {
+  const AssetsRoute({List<PageRouteInfo>? children})
+    : super(AssetsRoute.name, initialChildren: children);
+
+  static const String name = 'AssetsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const AssetsScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [HomeScreen]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})
@@ -54,22 +70,6 @@ class MarketRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const MarketScreen();
-    },
-  );
-}
-
-/// generated route for
-/// [ProfileScreen]
-class ProfileRoute extends PageRouteInfo<void> {
-  const ProfileRoute({List<PageRouteInfo>? children})
-    : super(ProfileRoute.name, initialChildren: children);
-
-  static const String name = 'ProfileRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const ProfileScreen();
     },
   );
 }
