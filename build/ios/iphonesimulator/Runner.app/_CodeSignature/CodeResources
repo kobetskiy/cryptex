@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		09swLJaj2O8VpJMReeCby5dARsU=
+		tU6O9xmeI7GJIvV64M+29O8baGY=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,15 +54,15 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		kLMJmpAgRAmpDg4KQxL83bLL1oY=
+		dNGbziQUaHkt/PKlrE0lLSxxRxM=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
-		4dlP6Kk7Ra55pbyL21zT+cQuNe8=
+		pV+o1dnNNA5xX1kTS9bsCkh6/RQ=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<data>
-		0z5FD6LA39kVLmbfW4W+Hrmt11I=
+		1R/3gnSwAA0G1wpZLF67R7C63Lo=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
 		<data>
@@ -79,6 +79,10 @@
 		<key>Frameworks/App.framework/flutter_assets/assets/icons/deposit.svg</key>
 		<data>
 		bN3uImErKydlg2nVxPH5a0WeUdk=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/icons/profile.svg</key>
+		<data>
+		SE6ofQ0cbl9YDJWugtbzMOWLTvc=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/icons/send.svg</key>
 		<data>
@@ -106,7 +110,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		+eWscT0AdxIkY9g/QHTRZ4WxvYs=
+		SG+e9NmKQkA6YX+IkJg//3DGvxI=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/shaders/ink_sparkle.frag</key>
 		<data>
@@ -341,7 +345,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			KY/AwvUhI2NO/4jkeqCceuT7ZuS1rfmgxh0yzJqpaG4=
+			cC71F7TDyFkpaoLujmU0wymLgHsNkj1R+6s/2rIWak4=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -355,21 +359,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			41kjDLjQVHop7CARGKbWlZJrYrvaqxx0axC5X0G50zs=
+			YbNaBo2gd3AePAZcN1HNOjxVlAFlv9qagUEUZ/DtShc=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			PvTyR3yExLUlaYEethJF32nIHnDS5ErBQZY1bLE4yMw=
+			UROsBkRSdU0Ng4S7JrZy35WMiNEsKZHOmOM0RwA6aQw=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5dOO4uvhAMT6zJoGwn8SJQX0NnsTUGJfW9YxKKY4yxM=
+			fZiAm5NPAgL1ZLEKj7MKNXLfD/TDZ3EZoAZqNn6C14g=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
@@ -398,6 +402,13 @@
 			<key>hash2</key>
 			<data>
 			Z6dG8uhFOo+s1LSGJs998JaIOBw1A+HooSpIrY/nir8=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/icons/profile.svg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			sy7QLjLWvDCfPL5affZaP+cV8oHR/thYjHfYU8oP/OU=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/icons/send.svg</key>
@@ -446,7 +457,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ewmlfwUhAFxciRd2jaZML6nCepMAhNgRkOX9M/X69YU=
+			AIeL8wvuwGCwoPHQp0MGEyK03wQk3zizCJ97e47BW2c=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/shaders/ink_sparkle.frag</key>

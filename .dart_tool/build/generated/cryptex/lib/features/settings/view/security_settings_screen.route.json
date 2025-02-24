@@ -1,0 +1,1 @@
+{"routes":[{"name":null,"pathParams":[],"pageType":{"import":null,"name":"SecuritySettingsScreen","isNullable":false,"isRecordType":false},"className":"SecuritySettingsScreen","parameters":[],"hasWrappedRoute":false,"hasConstConstructor":true,"deferredLoading":null}],"inputPath":"lib/features/settings/view/security_settings_screen.dart","inputHash":0}

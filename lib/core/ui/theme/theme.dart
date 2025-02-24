@@ -29,6 +29,7 @@ abstract class AppTheme {
       bodyColor: _AppColors.white,
       displayColor: _AppColors.white,
     ),
+    cardTheme: CardThemeData(color: _AppColors.darkSecondary),
     listTileTheme: ListTileThemeData(
       titleTextStyle: TextStyle(fontSize: 18, color: _AppColors.white),
       subtitleTextStyle: TextStyle(fontSize: 14, color: _AppColors.grey),

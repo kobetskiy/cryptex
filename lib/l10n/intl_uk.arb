@@ -3,5 +3,21 @@
   "totalAssets": "Загальні активи",
   "deposit": "Deposit",
   "withdraw": "Withdraw",
-  "send": "Send"
+  "send": "Send",
+  "sendCrypto": "Send Crypto",
+  "settings": "Settings",
+  "accountInfo": "Account Info",
+  "nickname": "Nickname",
+  "id": "ID",
+  "security": "Security",
+  "appLock": "App Lock",
+  "general": "General",
+  "language": "Language",
+  "colorTheme": "Color Theme",
+  "notifications": "Notifications",
+  "logOut": "Log Out",
+  "changeNickname": "Change Nickname",
+  "newNickname": "New nickname",
+  "notificationSettings": "Notification Settings",
+  "securitySettings": "Security Settings"
 }

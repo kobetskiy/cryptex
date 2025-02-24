@@ -22,9 +22,29 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "accountInfo": MessageLookupByLibrary.simpleMessage("Account Info"),
+    "appLock": MessageLookupByLibrary.simpleMessage("App Lock"),
+    "changeNickname": MessageLookupByLibrary.simpleMessage("Change Nickname"),
+    "colorTheme": MessageLookupByLibrary.simpleMessage("Color Theme"),
     "deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
+    "general": MessageLookupByLibrary.simpleMessage("General"),
+    "id": MessageLookupByLibrary.simpleMessage("ID"),
+    "language": MessageLookupByLibrary.simpleMessage("Language"),
+    "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
     "myAssets": MessageLookupByLibrary.simpleMessage("Мої активи"),
+    "newNickname": MessageLookupByLibrary.simpleMessage("New nickname"),
+    "nickname": MessageLookupByLibrary.simpleMessage("Nickname"),
+    "notificationSettings": MessageLookupByLibrary.simpleMessage(
+      "Notification Settings",
+    ),
+    "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
+    "security": MessageLookupByLibrary.simpleMessage("Security"),
+    "securitySettings": MessageLookupByLibrary.simpleMessage(
+      "Security Settings",
+    ),
     "send": MessageLookupByLibrary.simpleMessage("Send"),
+    "sendCrypto": MessageLookupByLibrary.simpleMessage("Send Crypto"),
+    "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "totalAssets": MessageLookupByLibrary.simpleMessage("Загальні активи"),
     "withdraw": MessageLookupByLibrary.simpleMessage("Withdraw"),
   };

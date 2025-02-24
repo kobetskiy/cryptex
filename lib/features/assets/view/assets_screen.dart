@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cryptex/core/router/router.dart';
 import 'package:cryptex/core/ui/widgets/widgets.dart';
 import 'package:cryptex/features/assets/widgets/widgets.dart';
 import 'package:cryptex/generated/l10n.dart';
@@ -40,7 +41,12 @@ class _AssetsScreenState extends State<AssetsScreen> {
     return BaseScaffold(
       appBar: AppBar(
         title: Text(S.of(context).myAssets),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.settings))],
+        actions: [
+          IconButton(
+            onPressed: () => context.router.push(SettingsRoute()),
+            icon: Icon(Icons.settings),
+          ),
+        ],
       ),
       body: CustomScrollView(
         slivers: [

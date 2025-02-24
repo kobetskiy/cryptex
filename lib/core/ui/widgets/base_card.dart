@@ -9,11 +9,9 @@ class BaseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: theme.colorScheme.darkTernary,
-        borderRadius: BorderRadius.circular(8),
-      ),
+    return Material(
+      color: theme.colorScheme.darkTernary,
+      borderRadius: BorderRadius.circular(8),
       child: child,
     );
   }

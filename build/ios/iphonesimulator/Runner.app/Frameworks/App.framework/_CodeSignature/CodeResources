@@ -10,11 +10,11 @@
 		</data>
 		<key>flutter_assets/AssetManifest.bin</key>
 		<data>
-		4dlP6Kk7Ra55pbyL21zT+cQuNe8=
+		pV+o1dnNNA5xX1kTS9bsCkh6/RQ=
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		0z5FD6LA39kVLmbfW4W+Hrmt11I=
+		1R/3gnSwAA0G1wpZLF67R7C63Lo=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -31,18 +31,6 @@
 		<key>flutter_assets/assets/icons/deposit.svg</key>
 		<data>
 		bN3uImErKydlg2nVxPH5a0WeUdk=
-		</data>
-		<key>flutter_assets/assets/icons/home.png</key>
-		<data>
-		TKzdSNOJgLJF/HUIU9mEHhxRgiM=
-		</data>
-		<key>flutter_assets/assets/icons/home.svg</key>
-		<data>
-		h/DDHIfuQyK8o/taIn6iEKnCUM4=
-		</data>
-		<key>flutter_assets/assets/icons/profile.png</key>
-		<data>
-		1VQGonu9v+IXSDJoKgRXZMFjfks=
 		</data>
 		<key>flutter_assets/assets/icons/profile.svg</key>
 		<data>
@@ -74,7 +62,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		+eWscT0AdxIkY9g/QHTRZ4WxvYs=
+		SG+e9NmKQkA6YX+IkJg//3DGvxI=
 		</data>
 		<key>flutter_assets/shaders/ink_sparkle.frag</key>
 		<data>
@@ -91,14 +79,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			PvTyR3yExLUlaYEethJF32nIHnDS5ErBQZY1bLE4yMw=
+			UROsBkRSdU0Ng4S7JrZy35WMiNEsKZHOmOM0RwA6aQw=
 			</data>
 		</dict>
 		<key>flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5dOO4uvhAMT6zJoGwn8SJQX0NnsTUGJfW9YxKKY4yxM=
+			fZiAm5NPAgL1ZLEKj7MKNXLfD/TDZ3EZoAZqNn6C14g=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -127,27 +115,6 @@
 			<key>hash2</key>
 			<data>
 			Z6dG8uhFOo+s1LSGJs998JaIOBw1A+HooSpIrY/nir8=
-			</data>
-		</dict>
-		<key>flutter_assets/assets/icons/home.png</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			63KqlCGiTYbafg8oP8uuhEDP+wOQw2hpEckkCi4uHAg=
-			</data>
-		</dict>
-		<key>flutter_assets/assets/icons/home.svg</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			0BJkZLsw+90jW0f8LsatT7xOAoT/HnWE8c9G6xR5vJ0=
-			</data>
-		</dict>
-		<key>flutter_assets/assets/icons/profile.png</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			57g72OVMkopmSdjQ7Od11BuZzgkOYDRvetwFMJcaV64=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/icons/profile.svg</key>
@@ -203,7 +170,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ewmlfwUhAFxciRd2jaZML6nCepMAhNgRkOX9M/X69YU=
+			AIeL8wvuwGCwoPHQp0MGEyK03wQk3zizCJ97e47BW2c=
 			</data>
 		</dict>
 		<key>flutter_assets/shaders/ink_sparkle.frag</key>

@@ -25,7 +25,6 @@ class AssetsHeader extends StatelessWidget {
               Text(S.of(context).totalAssets),
               SizedBox(width: 5),
               InkWell(
-                radius: 100,
                 borderRadius: BorderRadius.circular(100),
                 onTap: onTap,
                 child: Padding(
