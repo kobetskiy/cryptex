@@ -7,8 +7,8 @@ sealed class AssetActionsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-final class DepositEvent extends AssetActionsEvent {}
+final class Deposit extends AssetActionsEvent {}
 
-final class WithdrawEvent extends AssetActionsEvent {}
+final class Withdraw extends AssetActionsEvent {}
 
-final class SendCryptoEvent extends AssetActionsEvent {}
+final class SendCrypto extends AssetActionsEvent {}

@@ -10,9 +10,9 @@ class AssetActionsBloc extends Bloc<AssetActionsEvent, AssetActionsState> {
   AssetActionsBloc({required AssetActionsRepositoryInterface repository})
     : _assetActionsRepository = repository,
       super(AssetActionsInitial()) {
-    on<DepositEvent>(_depositEvent);
-    on<WithdrawEvent>(_withdrawEvent);
-    on<SendCryptoEvent>(_sendCryptoEvent);
+    on<Deposit>(_depositEvent);
+    on<Withdraw>(_withdrawEvent);
+    on<SendCrypto>(_sendCryptoEvent);
   }
 
   Future<void> _depositEvent(
