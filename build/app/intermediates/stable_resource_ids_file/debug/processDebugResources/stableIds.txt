@@ -92,6 +92,7 @@ com.example.cryptex:styleable/SwitchPreference = 0x7f0f003d
 com.example.cryptex:style/Widget.AppCompat.ButtonBar = 0x7f0e0145
 com.example.cryptex:style/TextAppearance.AppCompat.Widget.ActionMode.Title.Inverse = 0x7f0e0103
 com.example.cryptex:style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle = 0x7f0e0100
+com.example.cryptex:xml/flutter_share_file_paths = 0x7f100000
 com.example.cryptex:style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse = 0x7f0e00ff
 com.example.cryptex:style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle = 0x7f0e00fc
 com.example.cryptex:style/TextAppearance.AppCompat.Widget.ActionBar.Menu = 0x7f0e00fb

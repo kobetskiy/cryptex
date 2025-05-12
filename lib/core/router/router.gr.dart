@@ -43,6 +43,22 @@ class AssetsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [BuyCryptoScreen]
+class BuyCryptoRoute extends PageRouteInfo<void> {
+  const BuyCryptoRoute({List<PageRouteInfo>? children})
+    : super(BuyCryptoRoute.name, initialChildren: children);
+
+  static const String name = 'BuyCryptoRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const BuyCryptoScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [DepositActionScreen]
 class DepositActionRoute extends PageRouteInfo<void> {
   const DepositActionRoute({List<PageRouteInfo>? children})
@@ -123,6 +139,22 @@ class NotificationsSettingsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [RewardsScreen]
+class RewardsRoute extends PageRouteInfo<void> {
+  const RewardsRoute({List<PageRouteInfo>? children})
+    : super(RewardsRoute.name, initialChildren: children);
+
+  static const String name = 'RewardsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const RewardsScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [SecuritySettingsScreen]
 class SecuritySettingsRoute extends PageRouteInfo<void> {
   const SecuritySettingsRoute({List<PageRouteInfo>? children})
@@ -166,6 +198,22 @@ class SettingsRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const SettingsScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [SupportScreen]
+class SupportRoute extends PageRouteInfo<void> {
+  const SupportRoute({List<PageRouteInfo>? children})
+    : super(SupportRoute.name, initialChildren: children);
+
+  static const String name = 'SupportRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SupportScreen();
     },
   );
 }

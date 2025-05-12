@@ -1,11 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cryptex/app/app_screen.dart';
-import 'package:cryptex/features/assets/view/assets_screen.dart';
 import 'package:cryptex/features/assets/view/view.dart';
+import 'package:cryptex/features/buy_crypto/view/buy_crypto.dart';
 import 'package:cryptex/features/home/view/view.dart';
 import 'package:cryptex/features/market/view/view.dart';
-import 'package:cryptex/features/settings/view/nick_name_settings_screen.dart';
+import 'package:cryptex/features/rewards/view/rewards_screen.dart';
 import 'package:cryptex/features/settings/view/view.dart';
+import 'package:cryptex/features/support/view/support_screen.dart';
 
 part 'router.gr.dart';
 
@@ -29,5 +30,8 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: NickNameSettingsRoute.page, path: '/nick_name_settings'),
     AutoRoute(page: SecuritySettingsRoute.page, path: '/security_settings'),
     AutoRoute(page: NotificationsSettingsRoute.page, path: '/notifications_settings'),
+    AutoRoute(page: BuyCryptoRoute.page),
+    AutoRoute(page: SupportRoute.page),
+    AutoRoute(page: RewardsRoute.page),
   ];
 }
