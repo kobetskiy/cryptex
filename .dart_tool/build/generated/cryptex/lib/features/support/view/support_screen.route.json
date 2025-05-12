@@ -1,0 +1,1 @@
+{"routes":[{"name":null,"pathParams":[],"pageType":{"import":"package:cryptex/features/support/view/support_screen.dart","name":"SupportScreen","isNullable":false,"isRecordType":false},"className":"SupportScreen","parameters":[],"hasWrappedRoute":false,"hasConstConstructor":true,"deferredLoading":null}],"inputPath":"lib/features/support/view/support_screen.dart","inputHash":0}

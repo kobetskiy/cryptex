@@ -1,0 +1,1 @@
+{"routes":[{"name":null,"pathParams":[],"pageType":{"import":"package:cryptex/features/assets/view/assets_screen.dart","name":"AssetsScreen","isNullable":false,"isRecordType":false},"className":"AssetsScreen","parameters":[],"hasWrappedRoute":false,"hasConstConstructor":true,"deferredLoading":null}],"inputPath":"lib/features/assets/view/assets_screen.dart","inputHash":0}

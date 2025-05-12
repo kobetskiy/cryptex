@@ -1,0 +1,1 @@
+{"routes":[{"name":null,"pathParams":[],"pageType":{"import":"package:cryptex/features/buy_crypto/view/buy_crypto.dart","name":"BuyCryptoScreen","isNullable":false,"isRecordType":false},"className":"BuyCryptoScreen","parameters":[],"hasWrappedRoute":false,"hasConstConstructor":true,"deferredLoading":null}],"inputPath":"lib/features/buy_crypto/view/buy_crypto.dart","inputHash":0}

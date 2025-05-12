@@ -27,6 +27,54 @@ class AppRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [AssetsScreen]
+class AssetsRoute extends PageRouteInfo<void> {
+  const AssetsRoute({List<PageRouteInfo>? children})
+    : super(AssetsRoute.name, initialChildren: children);
+
+  static const String name = 'AssetsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const AssetsScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [BuyCryptoScreen]
+class BuyCryptoRoute extends PageRouteInfo<void> {
+  const BuyCryptoRoute({List<PageRouteInfo>? children})
+    : super(BuyCryptoRoute.name, initialChildren: children);
+
+  static const String name = 'BuyCryptoRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const BuyCryptoScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [DepositActionScreen]
+class DepositActionRoute extends PageRouteInfo<void> {
+  const DepositActionRoute({List<PageRouteInfo>? children})
+    : super(DepositActionRoute.name, initialChildren: children);
+
+  static const String name = 'DepositActionRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const DepositActionScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [HomeScreen]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})
@@ -59,17 +107,129 @@ class MarketRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ProfileScreen]
-class ProfileRoute extends PageRouteInfo<void> {
-  const ProfileRoute({List<PageRouteInfo>? children})
-    : super(ProfileRoute.name, initialChildren: children);
+/// [NickNameSettingsScreen]
+class NickNameSettingsRoute extends PageRouteInfo<void> {
+  const NickNameSettingsRoute({List<PageRouteInfo>? children})
+    : super(NickNameSettingsRoute.name, initialChildren: children);
 
-  static const String name = 'ProfileRoute';
+  static const String name = 'NickNameSettingsRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const ProfileScreen();
+      return const NickNameSettingsScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [NotificationsSettingsScreen]
+class NotificationsSettingsRoute extends PageRouteInfo<void> {
+  const NotificationsSettingsRoute({List<PageRouteInfo>? children})
+    : super(NotificationsSettingsRoute.name, initialChildren: children);
+
+  static const String name = 'NotificationsSettingsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const NotificationsSettingsScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [RewardsScreen]
+class RewardsRoute extends PageRouteInfo<void> {
+  const RewardsRoute({List<PageRouteInfo>? children})
+    : super(RewardsRoute.name, initialChildren: children);
+
+  static const String name = 'RewardsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const RewardsScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [SecuritySettingsScreen]
+class SecuritySettingsRoute extends PageRouteInfo<void> {
+  const SecuritySettingsRoute({List<PageRouteInfo>? children})
+    : super(SecuritySettingsRoute.name, initialChildren: children);
+
+  static const String name = 'SecuritySettingsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SecuritySettingsScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [SendCryptoActionScreen]
+class SendCryptoActionRoute extends PageRouteInfo<void> {
+  const SendCryptoActionRoute({List<PageRouteInfo>? children})
+    : super(SendCryptoActionRoute.name, initialChildren: children);
+
+  static const String name = 'SendCryptoActionRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SendCryptoActionScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [SettingsScreen]
+class SettingsRoute extends PageRouteInfo<void> {
+  const SettingsRoute({List<PageRouteInfo>? children})
+    : super(SettingsRoute.name, initialChildren: children);
+
+  static const String name = 'SettingsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SettingsScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [SupportScreen]
+class SupportRoute extends PageRouteInfo<void> {
+  const SupportRoute({List<PageRouteInfo>? children})
+    : super(SupportRoute.name, initialChildren: children);
+
+  static const String name = 'SupportRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SupportScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [WithdrawActionScreen]
+class WithdrawActionRoute extends PageRouteInfo<void> {
+  const WithdrawActionRoute({List<PageRouteInfo>? children})
+    : super(WithdrawActionRoute.name, initialChildren: children);
+
+  static const String name = 'WithdrawActionRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const WithdrawActionScreen();
     },
   );
 }

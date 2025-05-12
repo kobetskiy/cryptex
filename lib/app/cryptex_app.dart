@@ -1,3 +1,4 @@
+import 'package:cryptex/app/app.dart';
 import 'package:cryptex/core/localization/localization.dart';
 import 'package:cryptex/core/router/router.dart';
 import 'package:cryptex/core/ui/theme/theme.dart';
@@ -15,13 +16,15 @@ class _CryptexAppState extends State<CryptexApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Cryptex',
-      theme: AppTheme.darkTheme,
-      debugShowCheckedModeBanner: false,
-      supportedLocales: AppLocalization.supportedLocales,
-      localizationsDelegates: AppLocalization.localizationsDelegates,
-      routerConfig: _router.config(),
+    return AppInitializer(
+      child: MaterialApp.router(
+        title: 'Cryptex',
+        theme: AppTheme.darkTheme,
+        debugShowCheckedModeBanner: false,
+        supportedLocales: AppLocalization.supportedLocales,
+        localizationsDelegates: AppLocalization.localizationsDelegates,
+        routerConfig: _router.config(),
+      ),
     );
   }
 }
