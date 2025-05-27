@@ -1,4 +1,3 @@
-import 'package:cryptex/core/ui/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class SettingsListTile extends StatelessWidget {
@@ -19,7 +18,10 @@ class SettingsListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final trailingTextStyle = TextStyle().copyWith(
-      color: theme.colorScheme.grey,
+      color:
+          theme.brightness == Brightness.dark
+              ? Colors.white.withValues(alpha: 0.4)
+              : Colors.black.withValues(alpha: 0.4),
     );
     return ListTile(
       title: Text(title),
@@ -29,7 +31,13 @@ class SettingsListTile extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(trailingText, style: trailingTextStyle),
-          Icon(trailingIcon, color: theme.colorScheme.grey),
+          Icon(
+            trailingIcon,
+            color:
+                theme.brightness == Brightness.dark
+                    ? Colors.white.withValues(alpha: 0.4)
+                    : Colors.black.withValues(alpha: 0.4),
+          ),
         ],
       ),
     );

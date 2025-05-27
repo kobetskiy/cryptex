@@ -77,7 +77,7 @@ class _NickNameSettingsScreenState extends State<NickNameSettingsScreen> {
           PrimaryButton(
             isExpanded: true,
             onPressed: _changeNickname,
-            child: Text('Update'),
+            child: Text(S.of(context).update),
           ),
         ],
       ),

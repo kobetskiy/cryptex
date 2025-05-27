@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cryptex/core/router/router.dart';
 import 'package:cryptex/core/ui/const/const.dart';
-import 'package:cryptex/core/ui/theme/theme.dart';
 import 'package:cryptex/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -69,14 +68,19 @@ class _ActionItem extends StatelessWidget {
                   SvgPicture.asset(
                     icon,
                     colorFilter: ColorFilter.mode(
-                      theme.colorScheme.white,
+                      theme.brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black,
                       BlendMode.srcIn,
                     ),
                   ),
                   Text(
                     title,
                     style: theme.textTheme.labelSmall!.copyWith(
-                      color: theme.colorScheme.grey,
+                      color:
+                          theme.brightness == Brightness.dark
+                              ? Colors.white.withValues(alpha: 0.7)
+                              : Colors.black.withValues(alpha: 0.7),
                     ),
                   ),
                 ],

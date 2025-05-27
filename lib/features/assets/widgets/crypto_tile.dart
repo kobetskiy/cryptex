@@ -1,4 +1,3 @@
-import 'package:cryptex/core/ui/theme/theme.dart';
 import 'package:cryptex/core/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +12,15 @@ class CryptoTile extends StatelessWidget {
     return BaseCard(
       child: ListTile(
         title: const Text("BTC"),
-        subtitle: const Text("Bitcoin"),
+        subtitle: Text(
+          "Bitcoin",
+          style: TextStyle(
+            color:
+                theme.brightness == Brightness.dark
+                    ? Colors.white.withValues(alpha: 0.5)
+                    : Colors.black.withValues(alpha: 0.5),
+          ),
+        ),
         leading: const CircleAvatar(
           backgroundImage: NetworkImage(
             'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/300px-Bitcoin.svg.png',
@@ -24,10 +31,24 @@ class CryptoTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           spacing: 2,
           children: [
-            Text(isAssetsShown ? '0.89241' : "******"),
+            Text(
+              isAssetsShown ? '0.89241' : "******",
+              style: TextStyle(
+                color:
+                    theme.brightness == Brightness.dark
+                        ? Colors.white
+                        : Colors.black,
+              ),
+            ),
             Text(
               isAssetsShown ? '84.778,95 USD' : "******",
-              style: TextStyle(fontSize: 14, color: theme.colorScheme.grey),
+              style: TextStyle(
+                fontSize: 14,
+                color:
+                    theme.brightness == Brightness.dark
+                        ? Colors.white.withValues(alpha: 0.5)
+                        : Colors.black.withValues(alpha: 0.5),
+              ),
             ),
           ],
         ),

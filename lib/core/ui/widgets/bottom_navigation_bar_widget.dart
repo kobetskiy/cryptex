@@ -19,10 +19,9 @@ class BottomNavigationBarWidget extends StatefulWidget {
 class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return BottomNavigationBar(
       elevation: 0,
-      backgroundColor: theme.colorScheme.darkSecondary,
+      backgroundColor: AppColors.darkSecondary,
       type: BottomNavigationBarType.fixed,
       unselectedItemColor: Colors.grey[600],
       selectedItemColor: Color(0xFFEAB821),

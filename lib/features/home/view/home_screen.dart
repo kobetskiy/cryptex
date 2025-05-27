@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cryptex/core/router/router.dart';
+import 'package:cryptex/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
@@ -32,16 +33,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           Expanded(
                             child: TextField(
                               decoration: InputDecoration(
-                                hintText: 'Search',
+                                hintText: S.of(context).search,
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                prefixIcon: Icon(
-                                  Icons.search,
-                                  color: Colors.grey,
-                                ),
+                                prefixIcon: Icon(Icons.search),
                               ),
-                              style: TextStyle(color: Colors.white),
                             ),
                           ),
                         ],
@@ -57,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 _FunctionItem(
                   icon: Icons.shopping_bag_outlined,
-                  label: 'Buy Crypto',
+                  label: S.of(context).buyCrypto,
                   onTap: () {
                     print('Buy Crypto tapped');
                     context.router.push(BuyCryptoRoute());
@@ -65,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 _FunctionItem(
                   icon: Icons.headset_mic,
-                  label: 'Support',
+                  label: S.of(context).support,
                   onTap: () {
                     print('Support tapped');
                     context.router.push(SupportRoute());
@@ -73,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 _FunctionItem(
                   icon: Icons.card_giftcard,
-                  label: 'Rewards',
+                  label: S.of(context).rewards,
                   onTap: () {
                     print('Rewards tapped');
                     context.router.push(RewardsRoute());
@@ -82,38 +79,31 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
 
-            const Divider(height: 20, color: Colors.white24),
+            const Divider(height: 20),
 
             // Balance
             Column(
               children: [
-                const Text(
-                  'Total Balance',
-                  style: TextStyle(color: Colors.white70, fontSize: 18),
+                Text(
+                  S.of(context).totalBalance,
+                  style: TextStyle(fontSize: 18),
                 ),
                 const SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: const [
-                    Text(
-                      '\$',
-                      style: TextStyle(fontSize: 24, color: Colors.white70),
-                    ),
+                    Text('\$', style: TextStyle(fontSize: 24)),
                     SizedBox(width: 4),
                     Text(
                       '514.22',
                       style: TextStyle(
                         fontSize: 40,
-                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(width: 4),
-                    Text(
-                      'USD',
-                      style: TextStyle(fontSize: 20, color: Colors.white54),
-                    ),
+                    Text('USD', style: TextStyle(fontSize: 20)),
                   ],
                 ),
                 const SizedBox(height: 10),
@@ -122,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: const [
                     Text('-8.21%', style: TextStyle(color: Colors.redAccent)),
                     SizedBox(width: 10),
-                    Text('|', style: TextStyle(color: Colors.white54)),
+                    Text('|', style: TextStyle(color: Colors.grey)),
                     SizedBox(width: 10),
                     Text('-\$42.37', style: TextStyle(color: Colors.redAccent)),
                   ],
@@ -153,9 +143,16 @@ class _FunctionItem extends StatelessWidget {
       onTap: onTap,
       child: Column(
         children: [
-          Icon(icon, size: 36, color: Colors.white),
+          Icon(
+            icon,
+            size: 36,
+            color:
+                Theme.of(context).brightness == Brightness.dark
+                    ? Colors.white
+                    : Colors.black,
+          ),
           const SizedBox(height: 4),
-          Text(label, style: const TextStyle(color: Colors.white70)),
+          Text(label),
         ],
       ),
     );

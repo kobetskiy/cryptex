@@ -10,7 +10,10 @@ class BaseCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Material(
-      color: theme.colorScheme.darkTernary,
+      color:
+          theme.brightness == Brightness.dark
+              ? theme.colorScheme.darkTernary
+              : theme.colorScheme.lightTernary,
       borderRadius: BorderRadius.circular(8),
       child: child,
     );

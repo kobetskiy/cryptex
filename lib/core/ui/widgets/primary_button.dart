@@ -39,7 +39,7 @@ class PrimaryButton extends StatelessWidget {
     );
 
     final outlinedStyle = OutlinedButton.styleFrom(
-      foregroundColor: colorScheme.white,
+      foregroundColor: Theme.of(context).brightness == Brightness.dark ? colorScheme.white : colorScheme.black,
       side: BorderSide(color: colorScheme.grey),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
     );

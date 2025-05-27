@@ -376,6 +376,326 @@ class S {
       args: [],
     );
   }
+
+  /// `Welcome to`
+  String get welcomeTo {
+    return Intl.message(
+      'Welcome to',
+      name: 'welcomeTo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign Up`
+  String get signUp {
+    return Intl.message(
+      'Sign Up',
+      name: 'signUp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log In`
+  String get logIn {
+    return Intl.message(
+      'Log In',
+      name: 'logIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message(
+      'Email',
+      name: 'email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message(
+      'Password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Already have an account? Log In!`
+  String get alreadyHaveAnAccountLogIn {
+    return Intl.message(
+      'Already have an account? Log In!',
+      name: 'alreadyHaveAnAccountLogIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have an account yet? Sign Up`
+  String get dontHaveAnAccountYetSignUp {
+    return Intl.message(
+      'Don\'t have an account yet? Sign Up',
+      name: 'dontHaveAnAccountYetSignUp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get name {
+    return Intl.message(
+      'Name',
+      name: 'name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Address copied to clipboard`
+  String get addressCopiedToClipboard {
+    return Intl.message(
+      'Address copied to clipboard',
+      name: 'addressCopiedToClipboard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Some rules and confidentiality laws... Some rules and confidentiality laws... Some rules and confidentiality laws... Some rules and confidentiality laws...`
+  String get someRulesAndConfidentialityLawsSomeRulesAndConfidentialityLaws {
+    return Intl.message(
+      'Some rules and confidentiality laws... Some rules and confidentiality laws... Some rules and confidentiality laws... Some rules and confidentiality laws...',
+      name: 'someRulesAndConfidentialityLawsSomeRulesAndConfidentialityLaws',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Network`
+  String get network {
+    return Intl.message(
+      'Network',
+      name: 'network',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Address`
+  String get address {
+    return Intl.message(
+      'Address',
+      name: 'address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please fill in all fields`
+  String get pleaseFillInAllFields {
+    return Intl.message(
+      'Please fill in all fields',
+      name: 'pleaseFillInAllFields',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Receive Address`
+  String get receiveAddress {
+    return Intl.message(
+      'Receive Address',
+      name: 'receiveAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter address`
+  String get enterAddress {
+    return Intl.message(
+      'Enter address',
+      name: 'enterAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Withdraw Amount`
+  String get withdrawAmount {
+    return Intl.message(
+      'Withdraw Amount',
+      name: 'withdrawAmount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter amount`
+  String get enterAmount {
+    return Intl.message(
+      'Enter amount',
+      name: 'enterAmount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Or continue with`
+  String get orContinueWith {
+    return Intl.message(
+      'Or continue with',
+      name: 'orContinueWith',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Amount`
+  String get amount {
+    return Intl.message(
+      'Amount',
+      name: 'amount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pay Using`
+  String get payUsing {
+    return Intl.message(
+      'Pay Using',
+      name: 'payUsing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select payment method`
+  String get selectPaymentMethod {
+    return Intl.message(
+      'Select payment method',
+      name: 'selectPaymentMethod',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Buy`
+  String get buy {
+    return Intl.message(
+      'Buy',
+      name: 'buy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search`
+  String get search {
+    return Intl.message(
+      'Search',
+      name: 'search',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rewards`
+  String get rewards {
+    return Intl.message(
+      'Rewards',
+      name: 'rewards',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Balance`
+  String get totalBalance {
+    return Intl.message(
+      'Total Balance',
+      name: 'totalBalance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Market`
+  String get market {
+    return Intl.message(
+      'Market',
+      name: 'market',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update`
+  String get update {
+    return Intl.message(
+      'Update',
+      name: 'update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `News`
+  String get news {
+    return Intl.message(
+      'News',
+      name: 'news',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark`
+  String get dark {
+    return Intl.message(
+      'Dark',
+      name: 'dark',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone/Email`
+  String get phoneemail {
+    return Intl.message(
+      'Phone/Email',
+      name: 'phoneemail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ticket sent successfully`
+  String get ticketSentSuccessfully {
+    return Intl.message(
+      'Ticket sent successfully',
+      name: 'ticketSentSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your problem`
+  String get enterYourProblem {
+    return Intl.message(
+      'Enter your problem',
+      name: 'enterYourProblem',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,0 +1,1 @@
+{"routes":[{"name":null,"pathParams":[],"pageType":{"import":"package:cryptex/features/auth/view/log_in_screen.dart","name":"LogInScreen","isNullable":false,"isRecordType":false},"className":"LogInScreen","parameters":[],"hasWrappedRoute":false,"hasConstConstructor":true,"deferredLoading":null}],"inputPath":"lib/features/auth/view/log_in_screen.dart","inputHash":0}

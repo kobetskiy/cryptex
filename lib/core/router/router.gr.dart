@@ -91,6 +91,22 @@ class HomeRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [LogInScreen]
+class LogInRoute extends PageRouteInfo<void> {
+  const LogInRoute({List<PageRouteInfo>? children})
+    : super(LogInRoute.name, initialChildren: children);
+
+  static const String name = 'LogInRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const LogInScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [MarketScreen]
 class MarketRoute extends PageRouteInfo<void> {
   const MarketRoute({List<PageRouteInfo>? children})
@@ -134,6 +150,22 @@ class NotificationsSettingsRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const NotificationsSettingsScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [OnBoardingScreen]
+class OnBoardingRoute extends PageRouteInfo<void> {
+  const OnBoardingRoute({List<PageRouteInfo>? children})
+    : super(OnBoardingRoute.name, initialChildren: children);
+
+  static const String name = 'OnBoardingRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const OnBoardingScreen();
     },
   );
 }
@@ -198,6 +230,22 @@ class SettingsRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const SettingsScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [SignUpScreen]
+class SignUpRoute extends PageRouteInfo<void> {
+  const SignUpRoute({List<PageRouteInfo>? children})
+    : super(SignUpRoute.name, initialChildren: children);
+
+  static const String name = 'SignUpRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SignUpScreen();
     },
   );
 }

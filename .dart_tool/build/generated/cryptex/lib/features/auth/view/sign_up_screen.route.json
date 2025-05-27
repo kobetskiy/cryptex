@@ -1,0 +1,1 @@
+{"routes":[{"name":null,"pathParams":[],"pageType":{"import":"package:cryptex/features/auth/view/sign_up_screen.dart","name":"SignUpScreen","isNullable":false,"isRecordType":false},"className":"SignUpScreen","parameters":[],"hasWrappedRoute":false,"hasConstConstructor":true,"deferredLoading":null}],"inputPath":"lib/features/auth/view/sign_up_screen.dart","inputHash":0}

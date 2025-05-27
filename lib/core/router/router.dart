@@ -1,6 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cryptex/app/app_screen.dart';
+import 'package:cryptex/core/router/guards/auth_guard.dart';
+import 'package:cryptex/core/router/guards/on_boarding_guard.dart';
 import 'package:cryptex/features/assets/view/view.dart';
+import 'package:cryptex/features/auth/view/log_in_screen.dart';
+import 'package:cryptex/features/auth/view/on_boarding_screen.dart';
+import 'package:cryptex/features/auth/view/sign_up_screen.dart';
 import 'package:cryptex/features/buy_crypto/view/buy_crypto.dart';
 import 'package:cryptex/features/home/view/view.dart';
 import 'package:cryptex/features/market/view/view.dart';
@@ -17,6 +22,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(
       page: AppRoute.page,
       path: '/',
+      guards: [AuthGuard()],
       children: [
         AutoRoute(page: HomeRoute.page, path: 'home'),
         AutoRoute(page: MarketRoute.page, path: 'market'),
@@ -29,9 +35,15 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: SettingsRoute.page, path: '/settings'),
     AutoRoute(page: NickNameSettingsRoute.page, path: '/nick_name_settings'),
     AutoRoute(page: SecuritySettingsRoute.page, path: '/security_settings'),
-    AutoRoute(page: NotificationsSettingsRoute.page, path: '/notifications_settings'),
+    AutoRoute(
+      page: NotificationsSettingsRoute.page,
+      path: '/notifications_settings',
+    ),
     AutoRoute(page: BuyCryptoRoute.page),
     AutoRoute(page: SupportRoute.page),
     AutoRoute(page: RewardsRoute.page),
+    AutoRoute(page: LogInRoute.page, guards: [OnBoardingGuard()]),
+    AutoRoute(page: SignUpRoute.page),
+    AutoRoute(page: OnBoardingRoute.page),
   ];
 }

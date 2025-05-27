@@ -28,10 +28,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     }
   }
 
-  Future<void> _copyId(
-    CopyId event,
-    Emitter<SettingsState> emit,
-  ) async {
+  Future<void> _copyId(CopyId event, Emitter<SettingsState> emit) async {
     try {
       emit(SettingsLoading());
       await _settingsRepository.copyId();
@@ -40,6 +37,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       emit(SettingsFailure(e));
     }
   }
+
   Future<void> _setAppLock(
     SetAppLock event,
     Emitter<SettingsState> emit,

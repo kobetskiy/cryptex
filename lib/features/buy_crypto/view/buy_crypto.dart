@@ -36,7 +36,7 @@ class _BuyCryptoScreenState extends State<BuyCryptoScreen> {
             ),
             Divider(color: Theme.of(context).colorScheme.darkTernary),
             ListTile(
-              title: Text('Amount'),
+              title: Text(S.of(context).amount),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -77,7 +77,7 @@ class _BuyCryptoScreenState extends State<BuyCryptoScreen> {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      'Pay Using',
+                      S.of(context).payUsing,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ),
@@ -90,7 +90,7 @@ class _BuyCryptoScreenState extends State<BuyCryptoScreen> {
                       ),
                       contentPadding: EdgeInsets.symmetric(horizontal: 12),
                     ),
-                    hint: Text('Select payment method'),
+                    hint: Text(S.of(context).selectPaymentMethod),
                     items:
                         _paymentMethods
                             .map(
@@ -118,7 +118,7 @@ class _BuyCryptoScreenState extends State<BuyCryptoScreen> {
         child: PrimaryButton(
           isExpanded: true,
           onPressed: () {},
-          child: Text('Buy'),
+          child: Text(S.of(context).buy),
         ),
       ),
     );

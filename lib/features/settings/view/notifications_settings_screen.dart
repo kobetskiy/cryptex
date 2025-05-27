@@ -25,12 +25,12 @@ class _NotificationsSettingsScreenState
             child: SettingsSection(
               children: [
                 SwitchListTile.adaptive(
-                  title: Text('News'),
+                  title: Text(S.of(context).news),
                   value: true,
                   onChanged: (value) {},
                 ),
                 SwitchListTile.adaptive(
-                  title: Text('News'),
+                  title: Text(S.of(context).news),
                   value: true,
                   onChanged: (value) {},
                 ),

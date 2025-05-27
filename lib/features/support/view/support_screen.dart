@@ -28,7 +28,7 @@ class _SupportScreenState extends State<SupportScreen> {
               onPressed: () {
                 Navigator.of(context).pop();
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Ticket sent successfully')),
+                  SnackBar(content: Text(S.of(context).ticketSentSuccessfully)),
                 );
               },
               child: Text(S.of(context).send),
@@ -58,7 +58,7 @@ class _SupportScreenState extends State<SupportScreen> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  hintText: 'Enter your problem',
+                  hintText: S.of(context).enterYourProblem,
                 ),
                 minLines: 5,
                 maxLines: 12,
@@ -73,7 +73,7 @@ class _SupportScreenState extends State<SupportScreen> {
         child: PrimaryButton(
           isExpanded: true,
           onPressed: showAlertDialog,
-          child: Text('Buy'),
+          child: Text(S.of(context).buy),
         ),
       ),
     );
