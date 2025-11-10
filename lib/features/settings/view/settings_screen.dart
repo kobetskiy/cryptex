@@ -2,13 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cryptex/core/router/router.dart';
 import 'package:cryptex/core/ui/const/const.dart';
 import 'package:cryptex/core/ui/widgets/widgets.dart';
+import 'package:cryptex/features/auth/view/bloc/auth_bloc.dart';
 import 'package:cryptex/features/settings/view/bloc/localization/localization_bloc.dart';
 import 'package:cryptex/features/settings/view/bloc/localization/localization_event.dart';
 import 'package:cryptex/features/settings/view/bloc/settings_bloc.dart';
 import 'package:cryptex/features/settings/view/bloc/theme/theme_bloc.dart';
 import 'package:cryptex/features/settings/view/bloc/theme/theme_event.dart';
-import 'package:cryptex/features/settings/view/bloc/theme/theme_state.dart'
-    show ThemeState;
+import 'package:cryptex/features/settings/view/bloc/theme/theme_state.dart';
 import 'package:cryptex/features/settings/widgets/widgets.dart';
 import 'package:cryptex/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -47,10 +47,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Align(
                   alignment: Alignment.bottomCenter,
-                  child: PrimaryButton.outlined(
-                    isExpanded: true,
-                    onPressed: () {},
-                    child: Text(S.of(context).logOut),
+                  child: BlocConsumer<AuthBloc, AuthState>(
+                    listener: (context, state) {
+                      if (state is AuthLoggedOut) {
+                        context.router.replaceAll([LogInRoute()]);
+                      }
+
+                      if (state is AuthFailure) {
+                        Constants.showSnackBar(
+                          context,
+                          state.error,
+                          Constants.failureIcon(),
+                        );
+                      }
+                    },
+                    builder:
+                        (context, state) => PrimaryButton.outlined(
+                          isExpanded: true,
+                          onPressed:
+                              state is AuthLoading
+                                  ? null 
+                                  : () => context.read<AuthBloc>().add(LogOut()),
+                          child:
+                              state is AuthLoading
+                                  ? CircularProgressIndicator.adaptive()
+                                  : Text(S.of(context).logOut),
+                        ),
                   ),
                 ),
               ),

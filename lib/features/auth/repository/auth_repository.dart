@@ -5,9 +5,13 @@ class AuthRepository {
   final Dio _dio;
 
   AuthRepository({Dio? dio})
-    : _dio = dio ?? Dio(BaseOptions(baseUrl: 'http://localhost:5000/api/auth'));
+    : _dio =
+          dio ??
+          Dio(
+            BaseOptions(baseUrl: 'https://cryptex-back.onrender.com/api/auth'),
+          );
 
-  Future<Response> signUp({
+  Future<void> signUp({
     required String email,
     required String password,
     required String name,
@@ -29,19 +33,19 @@ class AuthRepository {
         },
       );
 
-      final token = response.data['data'];
+      final token = response.data;
       if (token != null) {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('token', token);
       }
 
-      return response;
+      return;
     } on DioException catch (e) {
       throw Exception(_handleError(e));
     }
   }
 
-  Future<Response> logIn({
+  Future<void> logIn({
     required String email,
     required String password,
   }) async {
@@ -57,10 +61,15 @@ class AuthRepository {
         await prefs.setString('token', token);
       }
 
-      return response;
+      return;
     } on DioException catch (e) {
       throw Exception(_handleError(e));
     }
+  }
+
+  Future<void> logOut() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('token');
   }
 
   String _handleError(DioException e) {

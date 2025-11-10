@@ -10,12 +10,8 @@ class AuthInitial extends AuthState {}
 class AuthLoading extends AuthState {}
 
 class AuthSuccess extends AuthState {
-  final dynamic data;
-
-  AuthSuccess(this.data);
-
   @override
-  List<Object?> get props => [data];
+  List<Object?> get props => [];
 }
 
 class AuthFailure extends AuthState {
@@ -26,3 +22,5 @@ class AuthFailure extends AuthState {
   @override
   List<Object?> get props => [error];
 }
+
+class AuthLoggedOut extends AuthState {}

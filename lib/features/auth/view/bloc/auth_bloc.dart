@@ -11,17 +11,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc({required this.authRepository}) : super(AuthInitial()) {
     on<SignUp>(_onSignUpRequested);
     on<LogIn>(_onLogInRequested);
+    on<LogOut>(_onLogOutRequested);
   }
 
   Future<void> _onSignUpRequested(SignUp event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     try {
-      final response = await authRepository.signUp(
+       await authRepository.signUp(
         email: event.email,
         password: event.password,
         name: event.name,
       );
-      emit(AuthSuccess(response.data));
+      emit(AuthSuccess());
     } catch (e) {
       emit(AuthFailure(e.toString()));
     }
@@ -30,11 +31,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _onLogInRequested(LogIn event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     try {
-      final response = await authRepository.logIn(
+       await authRepository.logIn(
         email: event.email,
         password: event.password,
       );
-      emit(AuthSuccess(response.data));
+      emit(AuthSuccess());
+    } catch (e) {
+      emit(AuthFailure(e.toString()));
+    }
+  }
+
+  Future<void> _onLogOutRequested(LogOut event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
+    try {
+      await authRepository.logOut();
+      emit(AuthLoggedOut());
     } catch (e) {
       emit(AuthFailure(e.toString()));
     }
