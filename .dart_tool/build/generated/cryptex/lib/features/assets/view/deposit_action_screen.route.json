@@ -1,1 +1,0 @@
-{"routes":[{"name":null,"pathParams":[],"pageType":{"import":null,"name":"DepositActionScreen","isNullable":false,"isRecordType":false},"className":"DepositActionScreen","parameters":[],"hasWrappedRoute":false,"hasConstConstructor":true,"deferredLoading":null}],"inputPath":"lib/features/assets/view/deposit_action_screen.dart","inputHash":0}

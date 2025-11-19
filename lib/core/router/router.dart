@@ -12,6 +12,8 @@ import 'package:cryptex/features/market/view/view.dart';
 import 'package:cryptex/features/rewards/view/rewards_screen.dart';
 import 'package:cryptex/features/settings/view/view.dart';
 import 'package:cryptex/features/support/view/support_screen.dart';
+import 'package:cryptex/features/sell_crypto/view/sell_crypto_screen.dart';
+import 'package:cryptex/features/transfer_crypto/view/transfer_crypto.dart';
 
 part 'router.gr.dart';
 
@@ -45,5 +47,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: LogInRoute.page, guards: [OnBoardingGuard()]),
     AutoRoute(page: SignUpRoute.page),
     AutoRoute(page: OnBoardingRoute.page),
+    AutoRoute(page: SellCryptoRoute.page),
+    AutoRoute(page: ConvertCryptoRoute.page)
   ];
 }

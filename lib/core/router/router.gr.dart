@@ -59,6 +59,22 @@ class BuyCryptoRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ConvertCryptoScreen]
+class ConvertCryptoRoute extends PageRouteInfo<void> {
+  const ConvertCryptoRoute({List<PageRouteInfo>? children})
+    : super(ConvertCryptoRoute.name, initialChildren: children);
+
+  static const String name = 'ConvertCryptoRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ConvertCryptoScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [DepositActionScreen]
 class DepositActionRoute extends PageRouteInfo<void> {
   const DepositActionRoute({List<PageRouteInfo>? children})
@@ -198,6 +214,22 @@ class SecuritySettingsRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const SecuritySettingsScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [SellCryptoPage]
+class SellCryptoRoute extends PageRouteInfo<void> {
+  const SellCryptoRoute({List<PageRouteInfo>? children})
+    : super(SellCryptoRoute.name, initialChildren: children);
+
+  static const String name = 'SellCryptoRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SellCryptoPage();
     },
   );
 }

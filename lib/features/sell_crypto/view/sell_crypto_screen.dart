@@ -2,10 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cryptex/core/ui/theme/theme.dart';
 import 'package:cryptex/core/ui/widgets/widgets.dart';
 import 'package:cryptex/features/buy_crypto/models/crypto_coin.dart';
-import 'package:cryptex/features/buy_crypto/repositories/buy_crypto_repository.dart';
-import 'package:cryptex/features/buy_crypto/view/bloc/buy_crypto_bloc.dart';
-import 'package:cryptex/features/buy_crypto/view/bloc/buy_crypto_event.dart';
-import 'package:cryptex/features/buy_crypto/view/bloc/buy_crypto_state.dart';
+import 'package:cryptex/features/sell_crypto/repositories/repository.dart';
+import 'package:cryptex/features/sell_crypto/view/bloc/sell_crypto_bloc.dart';
+import 'package:cryptex/features/sell_crypto/view/bloc/sell_crypto_event.dart';
+import 'package:cryptex/features/sell_crypto/view/bloc/sell_crypto_state.dart';
 import 'package:cryptex/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,30 +13,28 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cryptex/features/auth/view/bloc/auth_bloc.dart';
 
 @RoutePage()
-class BuyCryptoScreen extends StatelessWidget {
-  const BuyCryptoScreen({super.key});
+class SellCryptoPage  extends StatelessWidget {
+  const SellCryptoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => BuyCryptoBloc(
-        repository: BuyCryptoRepository(),
+      create: (context) => SellCryptoBloc(
+        repository: SellCryptoRepository(),
       )..add(const LoadCryptoPrices()),
-      child: const _BuyCryptoScreenContent(),
+      child: const _SellCryptoScreenContent(),
     );
   }
 }
 
-class _BuyCryptoScreenContent extends StatefulWidget {
-  const _BuyCryptoScreenContent();
+class _SellCryptoScreenContent extends StatefulWidget {
+  const _SellCryptoScreenContent();
 
   @override
-  State<_BuyCryptoScreenContent> createState() => _BuyCryptoScreenContentState();
+  State<_SellCryptoScreenContent> createState() => _SellCryptoScreenContentState();
 }
 
-class _BuyCryptoScreenContentState extends State<_BuyCryptoScreenContent> {
-  final List<String> _paymentMethods = ['Credit Card', 'PayPal', 'Apple Pay'];
-  String? _selectedPaymentMethod;
+class _SellCryptoScreenContentState extends State<_SellCryptoScreenContent> {
   final TextEditingController _amountController = TextEditingController();
   int? _userId;
 
@@ -53,7 +51,7 @@ class _BuyCryptoScreenContentState extends State<_BuyCryptoScreenContent> {
     if (authState is AuthSuccess) {
       userId = authState.userId;
     } else {
-      final repository = BuyCryptoRepository();
+      final repository = SellCryptoRepository();
       userId = await repository.getSavedUserId();
     }
 
@@ -61,7 +59,8 @@ class _BuyCryptoScreenContentState extends State<_BuyCryptoScreenContent> {
       setState(() {
         _userId = userId;
       });
-      context.read<BuyCryptoBloc>().add(LoadUserBalance(userId));
+      context.read<SellCryptoBloc>().add(LoadUserBalance(userId));
+      context.read<SellCryptoBloc>().add(LoadUserCryptoBalances(userId));
     }
   }
 
@@ -71,7 +70,7 @@ class _BuyCryptoScreenContentState extends State<_BuyCryptoScreenContent> {
     super.dispose();
   }
 
-  void _showCoinSelector(BuildContext context, BuyCryptoState state) {
+  void _showCoinSelector(BuildContext context, SellCryptoState state) {
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
@@ -84,13 +83,15 @@ class _BuyCryptoScreenContentState extends State<_BuyCryptoScreenContent> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Select Coin',
+                'Select Coin to Sell',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(height: 16),
               ...CryptoCoin.values.map((coin) {
                 final price = state.cryptoPrices[coin.symbol] ?? 0.0;
+                final balance = state.cryptoBalances[coin.id] ?? 0.0;
                 final isSelected = state.selectedCoin == coin;
+                
                 return ListTile(
                   leading: CircleAvatar(
                     backgroundColor: isSelected ? Colors.blue : Colors.grey,
@@ -100,7 +101,7 @@ class _BuyCryptoScreenContentState extends State<_BuyCryptoScreenContent> {
                     ),
                   ),
                   title: Text(coin.name),
-                  subtitle: Text(coin.symbol),
+                  subtitle: Text('${coin.symbol} • Balance: ${balance.toStringAsFixed(6)}'),
                   trailing: price > 0
                       ? Text(
                           '\$${price.toStringAsFixed(2)}',
@@ -111,10 +112,13 @@ class _BuyCryptoScreenContentState extends State<_BuyCryptoScreenContent> {
                           style: TextStyle(color: Colors.grey),
                         ),
                   selected: isSelected,
-                  onTap: () {
-                    context.read<BuyCryptoBloc>().add(SelectCoin(coin));
-                    Navigator.pop(modalContext);
-                  },
+                  enabled: balance > 0,
+                  onTap: balance > 0
+                      ? () {
+                          context.read<SellCryptoBloc>().add(SelectCoin(coin));
+                          Navigator.pop(modalContext);
+                        }
+                      : null,
                 );
               }).toList(),
             ],
@@ -126,24 +130,18 @@ class _BuyCryptoScreenContentState extends State<_BuyCryptoScreenContent> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<BuyCryptoBloc, BuyCryptoState>(
+    return BlocConsumer<SellCryptoBloc, SellCryptoState>(
       listener: (context, state) {
-        if (state.status == BuyCryptoStatus.success) {
+        if (state.status == SellCryptoStatus.success) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Purchase successful!'),
+              content: Text('Sale successful!'),
               backgroundColor: Colors.green,
             ),
           );
           _amountController.clear();
-          setState(() {
-            _selectedPaymentMethod = null;
-          });
-          context.read<BuyCryptoBloc>().add(UpdateAmount(0));
-          if (_userId != null) {
-            context.read<BuyCryptoBloc>().add(LoadUserBalance(_userId!));
-          }
-        } else if (state.status == BuyCryptoStatus.error) {
+          context.read<SellCryptoBloc>().add(UpdateAmount(0));
+        } else if (state.status == SellCryptoStatus.error) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(state.errorMessage ?? 'An error occurred'),
@@ -153,28 +151,21 @@ class _BuyCryptoScreenContentState extends State<_BuyCryptoScreenContent> {
         }
       },
       builder: (context, state) {
-        final isLoading = state.status == BuyCryptoStatus.loading;
+        final isLoading = state.status == SellCryptoStatus.loading;
         final currentPrice = state.cryptoPrices[state.selectedCoin.symbol] ?? 0.0;
-
-        // ДЕБАГ: Виводимо всі ціни в консоль
-        print('=== Current State Debug ===');
-        print('Status: ${state.status}');
-        print('Selected Coin: ${state.selectedCoin.name}');
-        print('All Prices: ${state.cryptoPrices}');
-        print('Current Price: $currentPrice');
-        print('Amount: ${state.amount}');
-        print('Cost: ${state.cost}');
 
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            title: Text(S.of(context).buyCrypto),
+            title: Text("Sell crypto"),
             actions: [
-              // Кнопка для перезавантаження цін (для дебагу)
               IconButton(
                 icon: const Icon(Icons.refresh),
                 onPressed: () {
-                  context.read<BuyCryptoBloc>().add(const LoadCryptoPrices());
+                  context.read<SellCryptoBloc>().add(const LoadCryptoPrices());
+                  if (_userId != null) {
+                    context.read<SellCryptoBloc>().add(LoadUserCryptoBalances(_userId!));
+                  }
                 },
               ),
             ],
@@ -182,6 +173,7 @@ class _BuyCryptoScreenContentState extends State<_BuyCryptoScreenContent> {
           body: SafeArea(
             child: Column(
               children: [
+                // Показуємо баланс USD
                 Container(
                   padding: const EdgeInsets.all(16),
                   color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
@@ -189,7 +181,7 @@ class _BuyCryptoScreenContentState extends State<_BuyCryptoScreenContent> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Your Balance:',
+                        'USD Balance:',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       Text(
@@ -202,7 +194,26 @@ class _BuyCryptoScreenContentState extends State<_BuyCryptoScreenContent> {
                     ],
                   ),
                 ),
-                if (state.amount > 0 && !state.hasEnoughBalance)
+
+                if (isLoading)
+                  const LinearProgressIndicator()
+                else if (state.cryptoPrices.isEmpty)
+                  Container(
+                    color: Colors.orange.withOpacity(0.2),
+                    padding: const EdgeInsets.all(8),
+                    child: const Row(
+                      children: [
+                        Icon(Icons.warning, color: Colors.orange),
+                        SizedBox(width: 8),
+                        Expanded(
+                          child: Text('Prices not loaded. Tap refresh button.'),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                // Попередження якщо недостатньо крипти
+                if (state.amount > 0 && !state.hasEnoughCrypto)
                   Container(
                     padding: const EdgeInsets.all(12),
                     margin: const EdgeInsets.all(16),
@@ -217,31 +228,15 @@ class _BuyCryptoScreenContentState extends State<_BuyCryptoScreenContent> {
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                            'Insufficient balance! Need \$${state.amount.toStringAsFixed(2)}',
+                            'Insufficient ${state.selectedCoin.symbol}! You have ${state.selectedCoinBalance.toStringAsFixed(6)}',
                             style: const TextStyle(color: Colors.red),
                           ),
                         ),
                       ],
                     ),
                   ),
-                // Показуємо статус завантаження
-                if (isLoading)
-                  const LinearProgressIndicator()
-                else if (state.cryptoPrices.isEmpty)
-                  Container(
-                    color: Colors.orange.withOpacity(0.2),
-                    padding: const EdgeInsets.all(8),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.warning, color: Colors.orange),
-                        const SizedBox(width: 8),
-                        const Expanded(
-                          child: Text('Prices not loaded. Tap refresh button.'),
-                        ),
-                      ],
-                    ),
-                  ),
 
+                // Вибір монети
                 ListTile(
                   title: Text(S.of(context).coin),
                   trailing: Row(
@@ -252,22 +247,13 @@ class _BuyCryptoScreenContentState extends State<_BuyCryptoScreenContent> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(state.selectedCoin.name),
-                          if (currentPrice > 0)
-                            Text(
-                              '\$${currentPrice.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                color: Colors.grey,
-                                fontSize: 12,
-                              ),
-                            )
-                          else
-                            const Text(
-                              'Price: N/A',
-                              style: TextStyle(
-                                color: Colors.red,
-                                fontSize: 12,
-                              ),
+                          Text(
+                            'Balance: ${state.selectedCoinBalance.toStringAsFixed(6)}',
+                            style: TextStyle(
+                              color: state.selectedCoinBalance > 0 ? Colors.green : Colors.red,
+                              fontSize: 12,
                             ),
+                          ),
                         ],
                       ),
                       const SizedBox(width: 10),
@@ -278,19 +264,20 @@ class _BuyCryptoScreenContentState extends State<_BuyCryptoScreenContent> {
                 ),
                 Divider(color: Theme.of(context).colorScheme.darkTernary),
 
+                // Кількість для продажу
                 ListTile(
-                  title: Text(S.of(context).amount),
+                  title: Text('${S.of(context).amount} (${state.selectedCoin.symbol})'),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       SizedBox(
-                        width: 100,
+                        width: 120,
                         child: TextField(
                           controller: _amountController,
-                          enabled: !isLoading,
+                          enabled: !isLoading && state.selectedCoinBalance > 0,
                           keyboardType: const TextInputType.numberWithOptions(decimal: true),
                           inputFormatters: [
-                            FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}')),
+                            FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,6}')),
                           ],
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -301,30 +288,20 @@ class _BuyCryptoScreenContentState extends State<_BuyCryptoScreenContent> {
                               horizontal: 8,
                               vertical: 4,
                             ),
+                            suffixIcon: state.selectedCoinBalance > 0
+                                ? IconButton(
+                                    icon: const Icon(Icons.all_inclusive, size: 16),
+                                    onPressed: () {
+                                      _amountController.text = state.selectedCoinBalance.toStringAsFixed(6);
+                                      context.read<SellCryptoBloc>().add(UpdateAmount(state.selectedCoinBalance));
+                                    },
+                                  )
+                                : null,
                           ),
                           onChanged: (value) {
                             final amount = double.tryParse(value) ?? 0.0;
-                            context.read<BuyCryptoBloc>().add(UpdateAmount(amount));
+                            context.read<SellCryptoBloc>().add(UpdateAmount(amount));
                           },
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      const Text('USD'),
-                    ],
-                  ),
-                ),
-                Divider(color: Theme.of(context).colorScheme.darkTernary),
-
-                ListTile(
-                  title: Text(S.of(context).cost),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        state.cost.toStringAsFixed(6),
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: state.cost > 0 ? Colors.green : Colors.grey,
                         ),
                       ),
                       const SizedBox(width: 10),
@@ -333,48 +310,27 @@ class _BuyCryptoScreenContentState extends State<_BuyCryptoScreenContent> {
                   ),
                 ),
                 Divider(color: Theme.of(context).colorScheme.darkTernary),
-                const SizedBox(height: 40),
 
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
+                // Еквівалент в USD
+                ListTile(
+                  title: const Text('You will receive'),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          S.of(context).payUsing,
-                          style: Theme.of(context).textTheme.titleMedium,
+                      Text(
+                        '\$${state.usdValue.toStringAsFixed(2)}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          color: state.usdValue > 0 ? Colors.green : Colors.grey,
                         ),
                       ),
-                      const SizedBox(height: 10),
-                      DropdownButtonFormField<String>(
-                        value: _selectedPaymentMethod,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 12),
-                        ),
-                        hint: Text(S.of(context).selectPaymentMethod),
-                        items: _paymentMethods
-                            .map(
-                              (method) => DropdownMenuItem<String>(
-                                value: method,
-                                child: Text(method),
-                              ),
-                            )
-                            .toList(),
-                        onChanged: isLoading
-                            ? null
-                            : (value) {
-                                setState(() {
-                                  _selectedPaymentMethod = value;
-                                });
-                              },
-                      ),
+                      const SizedBox(width: 10),
+                      const Text('USD'),
                     ],
                   ),
                 ),
+                Divider(color: Theme.of(context).colorScheme.darkTernary),
               ],
             ),
           ),
@@ -384,18 +340,14 @@ class _BuyCryptoScreenContentState extends State<_BuyCryptoScreenContent> {
             child: PrimaryButton(
               isExpanded: true,
               onPressed: isLoading || 
-              state.amount <= 0 || 
-              _selectedPaymentMethod == null ||
-              !state.hasEnoughBalance ||
-              _userId == null
-              ? null
-              : () {
-                  context.read<BuyCryptoBloc>().add(
-                    SubmitBuyOrder(
-                      userId: _userId!,
-                      paymentMethod: _selectedPaymentMethod!,
-                    ),
-                  );
+                        state.amount <= 0 || 
+                        !state.hasEnoughCrypto ||
+                        _userId == null
+                  ? null
+                  : () {
+                      context.read<SellCryptoBloc>().add(
+                            SubmitSellOrder(userId: _userId!),
+                          );
                     },
               child: isLoading
                   ? const SizedBox(
@@ -406,8 +358,8 @@ class _BuyCryptoScreenContentState extends State<_BuyCryptoScreenContent> {
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                       ),
                     )
-                  : Text(S.of(context).buy),
-                ),
+                  : Text("Sell"),
+            ),
           ),
         );
       },

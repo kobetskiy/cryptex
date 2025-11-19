@@ -8,9 +8,10 @@ import 'package:cryptex/features/settings/view/bloc/theme/theme_bloc.dart';
 import 'package:cryptex/features/settings/view/bloc/theme/theme_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../features/auth/repository/auth_repository.dart';
-import '../features/auth/view/bloc/auth_bloc.dart';
+import 'package:cryptex/features/buy_crypto/repositories/buy_crypto_repository.dart';
+import 'package:cryptex/features/buy_crypto/view/bloc/buy_crypto_bloc.dart';
+import 'package:cryptex/features/auth/repository/auth_repository.dart';
+import 'package:cryptex/features/auth/view/bloc/auth_bloc.dart';
 
 class AppInitializer extends StatelessWidget {
   const AppInitializer({super.key, required this.child});

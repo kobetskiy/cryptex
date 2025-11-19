@@ -63,5 +63,10 @@
   "dark": "Темна",
   "phoneemail": "Телефон/Ел. пошта",
   "ticketSentSuccessfully": "Тікет успішно надіслано",
-  "enterYourProblem": "Опишіть вашу проблему"
+  "enterYourProblem": "Опишіть вашу проблему",
+  "selectCoin": "Оберіть монету",
+  "purchaseSuccessful": "Покупка успішна!",
+  "errorOccurred": "Сталася помилка",
+  "sellCrypto": "Продати криптовалюту",
+  "sell": "Продати"
 }

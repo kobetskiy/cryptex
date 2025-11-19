@@ -10,8 +10,12 @@ class AuthInitial extends AuthState {}
 class AuthLoading extends AuthState {}
 
 class AuthSuccess extends AuthState {
+  final int? userId;
+
+  AuthSuccess({this.userId});
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [userId];
 }
 
 class AuthFailure extends AuthState {

@@ -63,5 +63,10 @@
   "dark": "Dark",
   "phoneemail": "Phone/Email",
   "ticketSentSuccessfully": "Ticket sent successfully",
-  "enterYourProblem": "Enter your problem"
+  "enterYourProblem": "Enter your problem",
+  "selectCoin": "Select Coin",
+  "purchaseSuccessful": "Purchase successful!",
+  "errorOccurred": "An error occurred",
+  "sellCrypto": "Sell Crypto",
+  "sell": "Sell"
 }

@@ -17,12 +17,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _onSignUpRequested(SignUp event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     try {
-       await authRepository.signUp(
+      final userId = await authRepository.signUp(
         email: event.email,
         password: event.password,
         name: event.name,
       );
-      emit(AuthSuccess());
+      emit(AuthSuccess(userId: userId));
     } catch (e) {
       emit(AuthFailure(e.toString()));
     }
@@ -31,11 +31,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _onLogInRequested(LogIn event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     try {
-       await authRepository.logIn(
+      final userId = await authRepository.logIn(
         email: event.email,
         password: event.password,
       );
-      emit(AuthSuccess());
+      emit(AuthSuccess(userId: userId));
     } catch (e) {
       emit(AuthFailure(e.toString()));
     }

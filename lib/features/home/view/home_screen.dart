@@ -76,6 +76,22 @@ class _HomeScreenState extends State<HomeScreen> {
                     context.router.push(RewardsRoute());
                   },
                 ),
+                _FunctionItem(
+                  icon: Icons.sell,
+                  label: 'Sell Crypto',
+                  onTap: (){
+                    print('Sell crypto tapped');
+                    context.router.push(SellCryptoRoute());
+                  }
+                ),
+                _FunctionItem(
+                  icon: Icons.swap_horiz,
+                  label: 'Convert Crypto',
+                  onTap:(){
+                    print('Convert crypto tapped');
+                    context.router.push(ConvertCryptoRoute());
+                  }
+                ),
               ],
             ),
 

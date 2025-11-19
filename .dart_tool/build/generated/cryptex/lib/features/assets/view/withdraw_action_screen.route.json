@@ -1,1 +1,0 @@
-{"routes":[{"name":null,"pathParams":[],"pageType":{"import":null,"name":"WithdrawActionScreen","isNullable":false,"isRecordType":false},"className":"WithdrawActionScreen","parameters":[],"hasWrappedRoute":false,"hasConstConstructor":true,"deferredLoading":null}],"inputPath":"lib/features/assets/view/withdraw_action_screen.dart","inputHash":0}
