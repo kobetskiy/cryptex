@@ -1,0 +1,15 @@
+# Flutter/Dart/Pub
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# Android
+android/.gradle
+android/app/build/
+
+# iOS
+ios/Pods/
+
+# Other
+pubspec.lock

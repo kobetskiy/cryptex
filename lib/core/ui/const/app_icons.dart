@@ -3,4 +3,5 @@ abstract class AppIcons {
   static const send = 'assets/icons/send.svg';
   static const withdraw = 'assets/icons/withdraw.svg';
   static const google = 'assets/icons/google.svg';
+  static const sell_crypto = 'assets/icons/sell_crypto.png';
 }

@@ -1,1 +1,0 @@
-{"routes":[{"name":null,"pathParams":[],"pageType":{"import":"package:cryptex/features/rewards/view/rewards_screen.dart","name":"RewardsScreen","isNullable":false,"isRecordType":false},"className":"RewardsScreen","parameters":[],"hasWrappedRoute":false,"hasConstConstructor":true,"deferredLoading":null}],"inputPath":"lib/features/rewards/view/rewards_screen.dart","inputHash":0}
