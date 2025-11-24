@@ -26,38 +26,30 @@ class TransferCryptoState extends Equatable {
     this.userBalance = 0.0,
   });
 
-  // Скільки отримаємо в результаті конвертації
   double get convertedAmount {
     final fromPrice = cryptoPrices[fromCoin.symbol] ?? 0.0;
     final toPrice = cryptoPrices[toCoin.symbol] ?? 0.0;
     
     if (fromPrice == 0 || toPrice == 0) return 0.0;
     
-    // amount * fromPrice = USD value
-    // USD value / toPrice = amount in toCoin
     return (amount * fromPrice) / toPrice;
   }
 
-  // USD еквівалент
   double get usdValue {
     final fromPrice = cryptoPrices[fromCoin.symbol] ?? 0.0;
     return amount * fromPrice;
   }
 
-  // Отримуємо баланс вибраної монети FROM
   double get fromCoinBalance {
     return cryptoBalances[fromCoin.id] ?? 0.0;
   }
 
-  // Отримуємо баланс вибраної монети TO
   double get toCoinBalance {
     return cryptoBalances[toCoin.id] ?? 0.0;
   }
 
-  // Перевірка чи достатньо крипти для конвертації
   bool get hasEnoughCrypto => amount <= fromCoinBalance && amount > 0;
 
-  // Перевірка чи монети різні
   bool get coinsAreDifferent => fromCoin != toCoin;
 
   TransferCryptoState copyWith({

@@ -2,6 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cryptex/core/router/router.dart';
 import 'package:cryptex/generated/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:cryptex/features/buy_crypto/repositories/buy_crypto_repository.dart';
+import 'package:cryptex/features/auth/view/bloc/auth_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class HomeScreen extends StatefulWidget {
@@ -12,6 +15,57 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  double _userBalance = 0.0;
+  bool _isLoadingBalance = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserBalance();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
+  Future<void> _loadUserBalance() async {
+    if (!mounted) return;
+    
+    setState(() {
+      _isLoadingBalance = true;
+    });
+
+    try {
+      final authState = context.read<AuthBloc>().state;
+      int? userId;
+
+      if (authState is AuthSuccess) {
+        userId = authState.userId;
+      } else {
+        final repository = BuyCryptoRepository();
+        userId = await repository.getSavedUserId();
+      }
+
+      if (userId != null) {
+        final repository = BuyCryptoRepository();
+        final balance = await repository.getUserBalance(userId);
+        
+        if (mounted) {
+          setState(() {
+            _userBalance = balance;
+            _isLoadingBalance = false;
+          });
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isLoadingBalance = false;
+        });
+      }
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,25 +109,45 @@ class _HomeScreenState extends State<HomeScreen> {
                 _FunctionItem(
                   icon: Icons.shopping_bag_outlined,
                   label: S.of(context).buyCrypto,
-                  onTap: () {
+                  onTap: () async {
                     print('Buy Crypto tapped');
                     context.router.push(BuyCryptoRoute());
+                    if(mounted){
+                      _loadUserBalance();
+                      }
                   },
                 ),
                 _FunctionItem(
                   icon: Icons.headset_mic,
                   label: S.of(context).support,
-                  onTap: () {
+                  onTap: () async{
                     print('Support tapped');
                     context.router.push(SupportRoute());
+                   if(mounted){
+                      _loadUserBalance();
+                      }
                   },
                 ),
                 _FunctionItem(
                   icon: Icons.card_giftcard,
                   label: S.of(context).rewards,
-                  onTap: () {
+                  onTap: () async  {
                     print('Rewards tapped');
                     context.router.push(RewardsRoute());
+                    if(mounted){
+                      _loadUserBalance();
+                      }
+                  },
+                ),
+                _FunctionItem(
+                  icon: Icons.account_balance_wallet,
+                  label: 'Withdraw',
+                  onTap: () async {
+                    print('Withdraw tapped');
+                    context.router.push(const WithdrawFundsRoute());
+                    if(mounted){
+                      _loadUserBalance();
+                      }
                   },
                 ),
                 _FunctionItem(
@@ -92,6 +166,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     context.router.push(ConvertCryptoRoute());
                   }
                 ),
+                _FunctionItem(
+                  icon: Icons.trending_up,
+                  label: 'Limit Orders',
+                  onTap: () {
+                    print('Limit Orders tapped');
+                    context.router.push(const LimitOrdersRoute());
+                  },
+                ),
               ],
             ),
 
@@ -102,26 +184,28 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Text(
                   S.of(context).totalBalance,
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
                 const SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: const [
-                    Text('\$', style: TextStyle(fontSize: 24)),
-                    SizedBox(width: 4),
-                    Text(
-                      '514.22',
-                      style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
+                _isLoadingBalance
+                    ? const CircularProgressIndicator()
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          const Text('\$', style: TextStyle(fontSize: 24)),
+                          const SizedBox(width: 4),
+                          Text(
+                            _userBalance.toStringAsFixed(2),
+                            style: const TextStyle(
+                              fontSize: 40,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(width: 4),
+                          const Text('USD', style: TextStyle(fontSize: 20)),
+                        ],
                       ),
-                    ),
-                    SizedBox(width: 4),
-                    Text('USD', style: TextStyle(fontSize: 20)),
-                  ],
-                ),
                 const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -168,7 +252,13 @@ class _FunctionItem extends StatelessWidget {
                     : Colors.black,
           ),
           const SizedBox(height: 4),
-          Text(label),
+          Text(
+              label,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 12),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+          ),
         ],
       ),
     );

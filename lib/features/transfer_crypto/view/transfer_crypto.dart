@@ -253,8 +253,6 @@ class _TransferCryptoScreenContentState extends State<_TransferCryptoScreenConte
                       ],
                     ),
                   ),
-
-                // Попередження якщо недостатньо крипти
                 if (state.amount > 0 && !state.hasEnoughCrypto)
                   Container(
                     padding: const EdgeInsets.all(12),
@@ -277,8 +275,6 @@ class _TransferCryptoScreenContentState extends State<_TransferCryptoScreenConte
                       ],
                     ),
                   ),
-
-                // Попередження якщо монети однакові
                 if (!state.coinsAreDifferent)
                   Container(
                     padding: const EdgeInsets.all(12),
@@ -301,8 +297,6 @@ class _TransferCryptoScreenContentState extends State<_TransferCryptoScreenConte
                       ],
                     ),
                   ),
-
-                // FROM: Вибір монети
                 ListTile(
                   title: const Text('From'),
                   trailing: Row(
@@ -329,8 +323,6 @@ class _TransferCryptoScreenContentState extends State<_TransferCryptoScreenConte
                   onTap: isLoading ? null : () => _showFromCoinSelector(context, state),
                 ),
                 Divider(color: Theme.of(context).colorScheme.darkTernary),
-
-                // Кількість для конвертації
                 ListTile(
                   title: Text('${S.of(context).amount} (${state.fromCoin.symbol})'),
                   trailing: Row(
@@ -376,8 +368,6 @@ class _TransferCryptoScreenContentState extends State<_TransferCryptoScreenConte
                   ),
                 ),
                 Divider(color: Theme.of(context).colorScheme.darkTernary),
-
-                // Іконка обміну
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 8),
                   child: Icon(
@@ -388,8 +378,6 @@ class _TransferCryptoScreenContentState extends State<_TransferCryptoScreenConte
                 ),
 
                 Divider(color: Theme.of(context).colorScheme.darkTernary),
-
-                // TO: Вибір монети
                 ListTile(
                   title: const Text('To'),
                   trailing: Row(
@@ -416,8 +404,6 @@ class _TransferCryptoScreenContentState extends State<_TransferCryptoScreenConte
                   onTap: isLoading ? null : () => _showToCoinSelector(context, state),
                 ),
                 Divider(color: Theme.of(context).colorScheme.darkTernary),
-
-                // Скільки отримаємо
                 ListTile(
                   title: const Text('You will receive'),
                   trailing: Row(
@@ -437,8 +423,6 @@ class _TransferCryptoScreenContentState extends State<_TransferCryptoScreenConte
                   ),
                 ),
                 Divider(color: Theme.of(context).colorScheme.darkTernary),
-
-                // USD еквівалент
                 if (state.amount > 0)
                   Padding(
                     padding: const EdgeInsets.all(16),

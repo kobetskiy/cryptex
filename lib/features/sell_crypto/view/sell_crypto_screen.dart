@@ -173,7 +173,6 @@ class _SellCryptoScreenContentState extends State<_SellCryptoScreenContent> {
           body: SafeArea(
             child: Column(
               children: [
-                // Показуємо баланс USD
                 Container(
                   padding: const EdgeInsets.all(16),
                   color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
@@ -211,8 +210,6 @@ class _SellCryptoScreenContentState extends State<_SellCryptoScreenContent> {
                       ],
                     ),
                   ),
-
-                // Попередження якщо недостатньо крипти
                 if (state.amount > 0 && !state.hasEnoughCrypto)
                   Container(
                     padding: const EdgeInsets.all(12),
@@ -235,8 +232,6 @@ class _SellCryptoScreenContentState extends State<_SellCryptoScreenContent> {
                       ],
                     ),
                   ),
-
-                // Вибір монети
                 ListTile(
                   title: Text(S.of(context).coin),
                   trailing: Row(
@@ -263,8 +258,6 @@ class _SellCryptoScreenContentState extends State<_SellCryptoScreenContent> {
                   onTap: isLoading ? null : () => _showCoinSelector(context, state),
                 ),
                 Divider(color: Theme.of(context).colorScheme.darkTernary),
-
-                // Кількість для продажу
                 ListTile(
                   title: Text('${S.of(context).amount} (${state.selectedCoin.symbol})'),
                   trailing: Row(
@@ -310,8 +303,6 @@ class _SellCryptoScreenContentState extends State<_SellCryptoScreenContent> {
                   ),
                 ),
                 Divider(color: Theme.of(context).colorScheme.darkTernary),
-
-                // Еквівалент в USD
                 ListTile(
                   title: const Text('You will receive'),
                   trailing: Row(

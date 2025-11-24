@@ -11,8 +11,8 @@ abstract class BuyCryptoRepositoryInterface {
   
   Future<Map<String, double>> getCryptoPrices();
   Future<double> getCoinPrice(int coinId);
-  Future<double> getUserBalance(int userId); // Додати
-  Future<Map<int, double>> getUserCryptoBalances(int userId); // Додати
+  Future<double> getUserBalance(int userId); 
+  Future<Map<int, double>> getUserCryptoBalances(int userId);
 }
 
 class BuyCryptoResponse {
@@ -65,18 +65,10 @@ Future<BuyCryptoResponse> buyCrypto({
 }) async {
   try {
     final token = await _getToken();
-    
-    print('===========================================');
-    print('=== BUY CRYPTO REQUEST ===');
-    print('URL: ${_dio.options.baseUrl}/user/$userId/wallet/buy');
-    print('Method: POST');
-    print('Query Parameters: id=$userId, coin=$coin, amount=$amount');
-    print('Token present: ${token != null}');
-    print('===========================================');
-    
+  
     final response = await _dio.post(
       '/user/$userId/wallet/buy',
-      queryParameters: {  // ⬅️ Змінено з data на queryParameters!
+      queryParameters: { 
         'id': userId,
         'coin': coin,
         'amount': amount,
@@ -86,11 +78,6 @@ Future<BuyCryptoResponse> buyCrypto({
       ),
     );
 
-    print('===========================================');
-    print('=== BUY CRYPTO RESPONSE ===');
-    print('Status Code: ${response.statusCode}');
-    print('New Balance: ${response.data['balance']}');
-    
     final wallet = response.data['wallet'];
     if (wallet != null && wallet['amountOfCoins'] != null) {
       final coins = wallet['amountOfCoins'] as List;
@@ -99,7 +86,6 @@ Future<BuyCryptoResponse> buyCrypto({
         print('  - Coin ${coinData['name']}: amount=${coinData['amount']} (price: \$${coinData['price']})');
       }
     }
-    print('===========================================');
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       final newBalance = response.data['balance']?.toDouble();
@@ -128,13 +114,7 @@ Future<BuyCryptoResponse> buyCrypto({
       success: false,
       message: 'Purchase failed',
     );
-  } on DioException catch (e) {
-    print('===========================================');
-    print('=== BUY CRYPTO ERROR ===');
-    print('Status Code: ${e.response?.statusCode}');
-    print('Error Response: ${e.response?.data}');
-    print('===========================================');
-    
+  } on DioException catch (e) {  
     throw Exception(_handleError(e));
   }
 }
@@ -142,12 +122,7 @@ Future<BuyCryptoResponse> buyCrypto({
   @override
 Future<double> getCoinPrice(int coinId) async {
   try {
-    final token = await _getToken(); // Додаємо токен
-    
-    print('=== Get Coin Price Request ===');
-    print('Coin: $coinId');
-    print('Token: ${token != null ? "Present (${token.substring(0, 20)}...)" : "Missing"}');
-    
+    final token = await _getToken(); 
     final response = await _dio.get(
       '/coin/price-history',
       queryParameters: {
@@ -158,10 +133,6 @@ Future<double> getCoinPrice(int coinId) async {
         headers: token != null ? {'Authorization': 'Bearer $token'} : null,
       ),
     );
-
-    print('Price Response Type: ${response.data.runtimeType}');
-    print('Price Response for coin $coinId: ${response.data}');
-
     if (response.data is List) {
       final priceList = response.data as List;
       
@@ -172,22 +143,12 @@ Future<double> getCoinPrice(int coinId) async {
       
       final lastPrice = priceList.last;
       final price = (lastPrice as num).toDouble();
-      
-      print('✅ Extracted price for coin $coinId: $price');
       return price;
     }
-
-    print('❌ ERROR: Unexpected response format for coin $coinId');
     return 0.0;
   } on DioException catch (e) {
-    print('=== Get Price Error for coin $coinId ===');
-    print('Status Code: ${e.response?.statusCode}');
-    print('Error Response: ${e.response?.data}');
-    
     return 0.0;
   } catch (e) {
-    print('=== Unknown Error for coin $coinId ===');
-    print('Error: $e');
     return 0.0;
   }
 }
@@ -196,10 +157,6 @@ Future<double> getCoinPrice(int coinId) async {
   Future<Map<String, double>> getCryptoPrices() async {
     try {
       final prices = <String, double>{};
-      
-      print('=== Loading All Crypto Prices ===');
-      
-      // Отримуємо ціни для всіх монет послідовно
       for (final coin in CryptoCoin.values) {
         try {
           final price = await getCoinPrice(coin.id);
@@ -210,13 +167,10 @@ Future<double> getCoinPrice(int coinId) async {
           prices[coin.symbol] = 0.0;
         }
       }
-      
-      print('=== All Prices Loaded ===');
       print(prices);
       
       return prices;
     } catch (e) {
-      print('Error fetching crypto prices: $e');
       return {};
     }
   }
@@ -245,9 +199,6 @@ Future<double> getCoinPrice(int coinId) async {
   Future<Map<int, double>> getUserCryptoBalances(int userId) async {
     try {
       final token = await _getToken();
-      
-      print('=== Get User Crypto Balances ===');
-      
       final response = await _dio.get(
         '/user/$userId',
         options: Options(

@@ -107,6 +107,22 @@ class HomeRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [LimitOrdersScreen]
+class LimitOrdersRoute extends PageRouteInfo<void> {
+  const LimitOrdersRoute({List<PageRouteInfo>? children})
+    : super(LimitOrdersRoute.name, initialChildren: children);
+
+  static const String name = 'LimitOrdersRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const LimitOrdersScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [LogInScreen]
 class LogInRoute extends PageRouteInfo<void> {
   const LogInRoute({List<PageRouteInfo>? children})
@@ -310,6 +326,22 @@ class WithdrawActionRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const WithdrawActionScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [WithdrawFundsScreen]
+class WithdrawFundsRoute extends PageRouteInfo<void> {
+  const WithdrawFundsRoute({List<PageRouteInfo>? children})
+    : super(WithdrawFundsRoute.name, initialChildren: children);
+
+  static const String name = 'WithdrawFundsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const WithdrawFundsScreen();
     },
   );
 }
