@@ -66,16 +66,7 @@ class SellCryptoRepository implements SellCryptoRepositoryInterface {
     required double amount,
   }) async {
     try {
-      final token = await _getToken();
-      
-      print('===========================================');
-      print('=== SELL CRYPTO REQUEST ===');
-      print('URL: ${_dio.options.baseUrl}/user/$userId/wallet/sell');
-      print('Method: POST');
-      print('Query Parameters: id=$userId, coin=$coin, amount=$amount');
-      print('Token present: ${token != null}');
-      print('===========================================');
-      
+      final token = await _getToken();  
       final response = await _dio.post(
         '/user/$userId/wallet/sell',
         queryParameters: {
@@ -87,11 +78,6 @@ class SellCryptoRepository implements SellCryptoRepositoryInterface {
           headers: token != null ? {'Authorization': 'Bearer $token'} : null,
         ),
       );
-
-      print('===========================================');
-      print('=== SELL CRYPTO RESPONSE ===');
-      print('Status Code: ${response.statusCode}');
-      print('New Balance: ${response.data['balance']}');
       
       final wallet = response.data['wallet'];
       if (wallet != null && wallet['amountOfCoins'] != null) {
@@ -101,7 +87,6 @@ class SellCryptoRepository implements SellCryptoRepositoryInterface {
           print('  - Coin ${coinData['name']}: amount=${coinData['amount']} (price: \$${coinData['price']})');
         }
       }
-      print('===========================================');
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final newBalance = response.data['balance']?.toDouble();
@@ -131,12 +116,6 @@ class SellCryptoRepository implements SellCryptoRepositoryInterface {
         message: 'Sale failed',
       );
     } on DioException catch (e) {
-      print('===========================================');
-      print('=== SELL CRYPTO ERROR ===');
-      print('Status Code: ${e.response?.statusCode}');
-      print('Error Response: ${e.response?.data}');
-      print('===========================================');
-      
       throw Exception(_handleError(e));
     }
   }
@@ -144,12 +123,7 @@ class SellCryptoRepository implements SellCryptoRepositoryInterface {
   @override
 Future<double> getCoinPrice(int coinId) async {
   try {
-    final token = await _getToken(); // Додаємо токен
-    
-    print('=== Get Coin Price Request ===');
-    print('Coin: $coinId');
-    print('Token: ${token != null ? "Present (${token.substring(0, 20)}...)" : "Missing"}');
-    
+    final token = await _getToken();    
     final response = await _dio.get(
       '/coin/price-history',
       queryParameters: {
@@ -160,36 +134,21 @@ Future<double> getCoinPrice(int coinId) async {
         headers: token != null ? {'Authorization': 'Bearer $token'} : null,
       ),
     );
-
-    print('Price Response Type: ${response.data.runtimeType}');
-    print('Price Response for coin $coinId: ${response.data}');
-
     if (response.data is List) {
       final priceList = response.data as List;
       
       if (priceList.isEmpty) {
-        print('Warning: Empty price list for coin $coinId');
         return 0.0;
       }
       
       final lastPrice = priceList.last;
       final price = (lastPrice as num).toDouble();
-      
-      print('✅ Extracted price for coin $coinId: $price');
       return price;
     }
-
-    print('❌ ERROR: Unexpected response format for coin $coinId');
     return 0.0;
-  } on DioException catch (e) {
-    print('=== Get Price Error for coin $coinId ===');
-    print('Status Code: ${e.response?.statusCode}');
-    print('Error Response: ${e.response?.data}');
-    
+  } on DioException catch (e) {   
     return 0.0;
   } catch (e) {
-    print('=== Unknown Error for coin $coinId ===');
-    print('Error: $e');
     return 0.0;
   }
 }
@@ -198,26 +157,16 @@ Future<double> getCoinPrice(int coinId) async {
   Future<Map<String, double>> getCryptoPrices() async {
    try {
     final prices = <String, double>{};
-    
-    print('=== Loading Crypto Prices for Sell ===');
-    
     for (final coin in CryptoCoin.values) {
       try {
         final price = await getCoinPrice(coin.id);
         prices[coin.symbol] = price;
-        print('${coin.symbol}: \$${price.toStringAsFixed(2)}');
       } catch (e) {
-        print('Error fetching price for ${coin.symbol}: $e');
         prices[coin.symbol] = 0.0;
       }
     }
-    
-    print('=== All Prices Loaded for Sell ===');
-    print(prices);
-    
     return prices;
   } catch (e) {
-    print('Error fetching crypto prices for sell: $e');
     return {};
   }
   }
@@ -247,10 +196,7 @@ Future<double> getCoinPrice(int coinId) async {
   @override
   Future<Map<int, double>> getUserCryptoBalances(int userId) async {
     try {
-      final token = await _getToken();
-      
-      print('=== Get User Crypto Balances ===');
-      
+      final token = await _getToken();    
       final response = await _dio.get(
         '/user/$userId',
         options: Options(
@@ -267,7 +213,6 @@ Future<double> getCoinPrice(int coinId) async {
           final coinId = coinData['name'] as int;
           final amount = (coinData['amount'] as num).toDouble();
           balances[coinId] = amount;
-          print('Coin $coinId balance: $amount');
         }
       }
       

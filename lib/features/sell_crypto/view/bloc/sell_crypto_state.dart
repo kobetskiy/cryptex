@@ -24,19 +24,16 @@ class SellCryptoState extends Equatable {
     this.userBalance = 0.0,
   });
 
-  // Отримуємо USD еквівалент продажу
   double get usdValue {
     final price = cryptoPrices[selectedCoin.symbol] ?? 0.0;
     if (price == 0) return 0.0;
     return amount * price;
   }
 
-  // Отримуємо баланс вибраної монети
   double get selectedCoinBalance {
     return cryptoBalances[selectedCoin.id] ?? 0.0;
   }
 
-  // Перевірка чи достатньо крипти для продажу
   bool get hasEnoughCrypto => amount <= selectedCoinBalance && amount > 0;
 
   SellCryptoState copyWith({

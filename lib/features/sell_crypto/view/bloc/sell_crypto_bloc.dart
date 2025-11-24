@@ -48,8 +48,6 @@ class SellCryptoBloc extends Bloc<SellCryptoEvent, SellCryptoState> {
       final balance = await repository.getUserBalance(event.userId);
       
       emit(state.copyWith(userBalance: balance));
-      
-      print('User USD balance loaded: \$${balance.toStringAsFixed(2)}');
     } catch (e) {
       print('Error loading user balance: $e');
     }
@@ -63,8 +61,6 @@ class SellCryptoBloc extends Bloc<SellCryptoEvent, SellCryptoState> {
       final cryptoBalances = await repository.getUserCryptoBalances(event.userId);
       
       emit(state.copyWith(cryptoBalances: cryptoBalances));
-      
-      print('User crypto balances loaded: $cryptoBalances');
     } catch (e) {
       print('Error loading crypto balances: $e');
     }
@@ -88,7 +84,6 @@ class SellCryptoBloc extends Bloc<SellCryptoEvent, SellCryptoState> {
     SubmitSellOrder event,
     Emitter<SellCryptoState> emit,
   ) async {
-    // Перевірка чи є достатньо криптовалюти
     if (!state.hasEnoughCrypto) {
       emit(
         state.copyWith(
@@ -120,10 +115,7 @@ class SellCryptoBloc extends Bloc<SellCryptoEvent, SellCryptoState> {
       );
 
       if (response.success) {
-        // Оновлюємо баланси після успішного продажу
         final newBalance = response.newBalance ?? state.userBalance;
-        
-        // Перезавантажуємо баланси криптовалют
         final cryptoBalances = await repository.getUserCryptoBalances(event.userId);
         
         emit(
