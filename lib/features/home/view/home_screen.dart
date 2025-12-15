@@ -103,81 +103,116 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _FunctionItem(
-                  icon: Icons.shopping_bag_outlined,
-                  label: S.of(context).buyCrypto,
-                  onTap: () async {
-                    print('Buy Crypto tapped');
-                    context.router.push(BuyCryptoRoute());
-                    if(mounted){
-                      _loadUserBalance();
-                      }
-                  },
-                ),
-                _FunctionItem(
-                  icon: Icons.headset_mic,
-                  label: S.of(context).support,
-                  onTap: () async{
-                    print('Support tapped');
-                    context.router.push(SupportRoute());
-                   if(mounted){
-                      _loadUserBalance();
-                      }
-                  },
-                ),
-                _FunctionItem(
-                  icon: Icons.card_giftcard,
-                  label: S.of(context).rewards,
-                  onTap: () async  {
-                    print('Rewards tapped');
-                    context.router.push(RewardsRoute());
-                    if(mounted){
-                      _loadUserBalance();
-                      }
-                  },
-                ),
-                _FunctionItem(
-                  icon: Icons.account_balance_wallet,
-                  label: 'Withdraw',
-                  onTap: () async {
-                    print('Withdraw tapped');
-                    context.router.push(const WithdrawFundsRoute());
-                    if(mounted){
-                      _loadUserBalance();
-                      }
-                  },
-                ),
-                _FunctionItem(
-                  icon: Icons.sell,
-                  label: 'Sell Crypto',
-                  onTap: (){
-                    print('Sell crypto tapped');
-                    context.router.push(SellCryptoRoute());
-                  }
-                ),
-                _FunctionItem(
-                  icon: Icons.swap_horiz,
-                  label: 'Convert Crypto',
-                  onTap:(){
-                    print('Convert crypto tapped');
-                    context.router.push(ConvertCryptoRoute());
-                  }
-                ),
-                _FunctionItem(
-                  icon: Icons.trending_up,
-                  label: 'Limit Orders',
-                  onTap: () {
-                    print('Limit Orders tapped');
-                    context.router.push(const LimitOrdersRoute());
-                  },
-                ),
-              ],
-            ),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  children: [
+                    // 1-й рядок
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _FunctionItem(
+                          icon: Icons.shopping_bag_outlined,
+                          label: S.of(context).buyCrypto,
+                          onTap: () async {
+                            print('Buy Crypto tapped');
+                            context.router.push(BuyCryptoRoute());
+                            if (mounted) _loadUserBalance();
+                          },
+                        ),
+                        _FunctionItem(
+                          icon: Icons.headset_mic,
+                          label: S.of(context).support,
+                          onTap: () async {
+                            print('Support tapped');
+                            context.router.push(SupportRoute());
+                            if (mounted) _loadUserBalance();
+                          },
+                        ),
+                        _FunctionItem(
+                          icon: Icons.card_giftcard,
+                          label: S.of(context).rewards,
+                          onTap: () async {
+                            print('Rewards tapped');
+                            context.router.push(RewardsRoute());
+                            if (mounted) _loadUserBalance();
+                          },
+                        ),
+                      ],
+                    ),
 
-            const Divider(height: 20),
+                    const SizedBox(height: 30),
+
+                    // 2-й рядок
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _FunctionItem(
+                          icon: Icons.account_balance_wallet,
+                          label: 'Withdraw',
+                          onTap: () async {
+                            print('Withdraw tapped');
+                            context.router.push(WithdrawFundsRoute());
+                            if (mounted) _loadUserBalance();
+                          },
+                        ),
+                        _FunctionItem(
+                          icon: Icons.sell,
+                          label: 'Sell Crypto',
+                          onTap: () {
+                            print('Sell crypto tapped');
+                            context.router.push(SellCryptoRoute());
+                          },
+                        ),
+                        _FunctionItem(
+                          icon: Icons.add_circle,
+                          label: 'Deposit Fiat',
+                          onTap: () {
+                            print('Deposit Fiat tapped');
+                            context.router.push(DepositFundsRoute());
+                          },
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 30),
+
+                    // 3-й рядок
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _FunctionItem(
+                          icon: Icons.logout,
+                          label: 'Withdraw Crypto',
+                          onTap: () {
+                            print('Withdraw Crypto tapped');
+                            context.router.push(WithdrawCryptoRoute());
+                          },
+                        ),
+                        _FunctionItem(
+                          icon: Icons.swap_horiz,
+                          label: 'Convert Crypto',
+                          onTap: () {
+                            print('Convert crypto tapped');
+                            context.router.push(ConvertCryptoRoute());
+                          },
+                        ),
+                        _FunctionItem(
+                          icon: Icons.trending_up,
+                          label: 'Limit Orders',
+                          onTap: () {
+                            print('Limit Orders tapped');
+                            context.router.push(LimitOrdersRoute());
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 50),
+
 
             // Balance
             Column(
@@ -239,27 +274,29 @@ class _FunctionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        children: [
-          Icon(
-            icon,
-            size: 36,
-            color:
-                Theme.of(context).brightness == Brightness.dark
-                    ? Colors.white
-                    : Colors.black,
-          ),
-          const SizedBox(height: 4),
-          Text(
+    return SizedBox(
+      width: 100, // Фіксована ширина для однакового вирівнювання
+      child: GestureDetector(
+        onTap: onTap,
+        child: Column(
+          children: [
+            Icon(
+              icon,
+              size: 36,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white
+                  : Colors.black,
+            ),
+            const SizedBox(height: 4),
+            Text(
               label,
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 12),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }
