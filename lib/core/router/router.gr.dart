@@ -91,6 +91,38 @@ class DepositActionRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [DepositCryptoScreen]
+class DepositCryptoRoute extends PageRouteInfo<void> {
+  const DepositCryptoRoute({List<PageRouteInfo>? children})
+    : super(DepositCryptoRoute.name, initialChildren: children);
+
+  static const String name = 'DepositCryptoRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const DepositCryptoScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [DepositFundsScreen]
+class DepositFundsRoute extends PageRouteInfo<void> {
+  const DepositFundsRoute({List<PageRouteInfo>? children})
+    : super(DepositFundsRoute.name, initialChildren: children);
+
+  static const String name = 'DepositFundsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const DepositFundsScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [HomeScreen]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})
@@ -102,6 +134,22 @@ class HomeRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const HomeScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [LimitOrdersScreen]
+class LimitOrdersRoute extends PageRouteInfo<void> {
+  const LimitOrdersRoute({List<PageRouteInfo>? children})
+    : super(LimitOrdersRoute.name, initialChildren: children);
+
+  static const String name = 'LimitOrdersRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const LimitOrdersScreen();
     },
   );
 }
@@ -310,6 +358,38 @@ class WithdrawActionRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const WithdrawActionScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [WithdrawCryptoScreen]
+class WithdrawCryptoRoute extends PageRouteInfo<void> {
+  const WithdrawCryptoRoute({List<PageRouteInfo>? children})
+    : super(WithdrawCryptoRoute.name, initialChildren: children);
+
+  static const String name = 'WithdrawCryptoRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const WithdrawCryptoScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [WithdrawFundsScreen]
+class WithdrawFundsRoute extends PageRouteInfo<void> {
+  const WithdrawFundsRoute({List<PageRouteInfo>? children})
+    : super(WithdrawFundsRoute.name, initialChildren: children);
+
+  static const String name = 'WithdrawFundsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const WithdrawFundsScreen();
     },
   );
 }

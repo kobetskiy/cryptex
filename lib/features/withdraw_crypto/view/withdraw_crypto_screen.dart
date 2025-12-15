@@ -2,40 +2,40 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cryptex/core/ui/theme/theme.dart';
 import 'package:cryptex/core/ui/widgets/widgets.dart';
 import 'package:cryptex/features/buy_crypto/models/crypto_coin.dart';
-import 'package:cryptex/features/sell_crypto/repositories/repository.dart';
-import 'package:cryptex/features/sell_crypto/view/bloc/sell_crypto_bloc.dart';
-import 'package:cryptex/features/sell_crypto/view/bloc/sell_crypto_event.dart';
-import 'package:cryptex/features/sell_crypto/view/bloc/sell_crypto_state.dart';
-import 'package:cryptex/generated/l10n.dart';
+import 'package:cryptex/features/withdraw_crypto/repositories/repositories.dart';
+import 'package:cryptex/features/withdraw_crypto/view/bloc/withdraw_crypto_bloc.dart';
+import 'package:cryptex/features/withdraw_crypto/view/bloc/withdraw_crypto_event.dart';
+import 'package:cryptex/features/withdraw_crypto/view/bloc/withdraw_crypto_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cryptex/features/auth/view/bloc/auth_bloc.dart';
 
 @RoutePage()
-class SellCryptoPage  extends StatelessWidget {
-  const SellCryptoPage({super.key});
+class WithdrawCryptoScreen extends StatelessWidget {
+  const WithdrawCryptoScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SellCryptoBloc(
-        repository: SellCryptoRepository(),
+      create: (context) => WithdrawCryptoBloc(
+        repository: WithdrawCryptoRepository(),
       )..add(const LoadCryptoPrices()),
-      child: const _SellCryptoScreenContent(),
+      child: const _WithdrawCryptoScreenContent(),
     );
   }
 }
 
-class _SellCryptoScreenContent extends StatefulWidget {
-  const _SellCryptoScreenContent();
+class _WithdrawCryptoScreenContent extends StatefulWidget {
+  const _WithdrawCryptoScreenContent();
 
   @override
-  State<_SellCryptoScreenContent> createState() => _SellCryptoScreenContentState();
+  State<_WithdrawCryptoScreenContent> createState() => _WithdrawCryptoScreenContentState();
 }
 
-class _SellCryptoScreenContentState extends State<_SellCryptoScreenContent> {
+class _WithdrawCryptoScreenContentState extends State<_WithdrawCryptoScreenContent> {
   final TextEditingController _amountController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
   int? _userId;
 
   @override
@@ -51,7 +51,7 @@ class _SellCryptoScreenContentState extends State<_SellCryptoScreenContent> {
     if (authState is AuthSuccess) {
       userId = authState.userId;
     } else {
-      final repository = SellCryptoRepository();
+      final repository = WithdrawCryptoRepository();
       userId = await repository.getSavedUserId();
     }
 
@@ -59,18 +59,19 @@ class _SellCryptoScreenContentState extends State<_SellCryptoScreenContent> {
       setState(() {
         _userId = userId;
       });
-      context.read<SellCryptoBloc>().add(LoadUserBalance(userId));
-      context.read<SellCryptoBloc>().add(LoadUserCryptoBalances(userId));
+      context.read<WithdrawCryptoBloc>().add(LoadUserBalance(userId));
+      context.read<WithdrawCryptoBloc>().add(LoadUserCryptoBalances(userId));
     }
   }
 
   @override
   void dispose() {
     _amountController.dispose();
+    _addressController.dispose();
     super.dispose();
   }
 
-  void _showCoinSelector(BuildContext context, SellCryptoState state) {
+  void _showCoinSelector(BuildContext context, WithdrawCryptoState state) {
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
@@ -83,7 +84,7 @@ class _SellCryptoScreenContentState extends State<_SellCryptoScreenContent> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Select Coin to Sell',
+                'Select Cryptocurrency',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(height: 16),
@@ -115,8 +116,9 @@ class _SellCryptoScreenContentState extends State<_SellCryptoScreenContent> {
                   enabled: balance > 0,
                   onTap: balance > 0
                       ? () {
-                          context.read<SellCryptoBloc>().add(SelectCoin(coin));
+                          context.read<WithdrawCryptoBloc>().add(SelectCoin(coin));
                           Navigator.pop(modalContext);
+                          _amountController.clear();
                         }
                       : null,
                 );
@@ -130,18 +132,18 @@ class _SellCryptoScreenContentState extends State<_SellCryptoScreenContent> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SellCryptoBloc, SellCryptoState>(
+    return BlocConsumer<WithdrawCryptoBloc, WithdrawCryptoState>(
       listener: (context, state) {
-        if (state.status == SellCryptoStatus.success) {
+        if (state.status == WithdrawCryptoStatus.success) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Sale successful!'),
+              content: Text('Withdrawal successful!'),
               backgroundColor: Colors.green,
             ),
           );
           _amountController.clear();
-          context.read<SellCryptoBloc>().add(UpdateAmount(0));
-        } else if (state.status == SellCryptoStatus.error) {
+          _addressController.clear();
+        } else if (state.status == WithdrawCryptoStatus.error) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(state.errorMessage ?? 'An error occurred'),
@@ -151,20 +153,20 @@ class _SellCryptoScreenContentState extends State<_SellCryptoScreenContent> {
         }
       },
       builder: (context, state) {
-        final isLoading = state.status == SellCryptoStatus.loading;
-        final currentPrice = state.cryptoPrices[state.selectedCoin.symbol] ?? 0.0;
+        final isLoading = state.status == WithdrawCryptoStatus.loading;
+        final coinPrice = state.cryptoPrices[state.selectedCoin.symbol] ?? 0.0;
 
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            title: Text("Sell crypto"),
+            title: const Text("Withdraw Crypto"),
             actions: [
               IconButton(
                 icon: const Icon(Icons.refresh),
                 onPressed: () {
-                  context.read<SellCryptoBloc>().add(const LoadCryptoPrices());
+                  context.read<WithdrawCryptoBloc>().add(const LoadCryptoPrices());
                   if (_userId != null) {
-                    context.read<SellCryptoBloc>().add(LoadUserCryptoBalances(_userId!));
+                    context.read<WithdrawCryptoBloc>().add(LoadUserCryptoBalances(_userId!));
                   }
                 },
               ),
@@ -173,27 +175,7 @@ class _SellCryptoScreenContentState extends State<_SellCryptoScreenContent> {
           body: SafeArea(
             child: Column(
               children: [
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'USD Balance:',
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      Text(
-                        '\$${state.userBalance.toStringAsFixed(2)}',
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
-                      ),
-                    ],
-                  ),
-                ),
-
+                // Індикатор завантаження
                 if (isLoading)
                   const LinearProgressIndicator()
                 else if (state.cryptoPrices.isEmpty)
@@ -210,6 +192,8 @@ class _SellCryptoScreenContentState extends State<_SellCryptoScreenContent> {
                       ],
                     ),
                   ),
+
+                // Попередження про недостатність коштів
                 if (state.amount > 0 && !state.hasEnoughCrypto)
                   Container(
                     padding: const EdgeInsets.all(12),
@@ -232,8 +216,10 @@ class _SellCryptoScreenContentState extends State<_SellCryptoScreenContent> {
                       ],
                     ),
                   ),
+
+                // Вибір криптовалюти
                 ListTile(
-                  title: Text(S.of(context).coin),
+                  title: const Text('Select Cryptocurrency'),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -258,8 +244,10 @@ class _SellCryptoScreenContentState extends State<_SellCryptoScreenContent> {
                   onTap: isLoading ? null : () => _showCoinSelector(context, state),
                 ),
                 Divider(color: Theme.of(context).colorScheme.darkTernary),
+
+                // Сума виведення
                 ListTile(
-                  title: Text('${S.of(context).amount} (${state.selectedCoin.symbol})'),
+                  title: Text('Amount (${state.selectedCoin.symbol})'),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -270,7 +258,7 @@ class _SellCryptoScreenContentState extends State<_SellCryptoScreenContent> {
                           enabled: !isLoading && state.selectedCoinBalance > 0,
                           keyboardType: const TextInputType.numberWithOptions(decimal: true),
                           inputFormatters: [
-                            FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,6}')),
+                            FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,8}')),
                           ],
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -285,15 +273,15 @@ class _SellCryptoScreenContentState extends State<_SellCryptoScreenContent> {
                                 ? IconButton(
                                     icon: const Icon(Icons.all_inclusive, size: 16),
                                     onPressed: () {
-                                      _amountController.text = state.selectedCoinBalance.toStringAsFixed(6);
-                                      context.read<SellCryptoBloc>().add(UpdateAmount(state.selectedCoinBalance));
+                                      _amountController.text = state.selectedCoinBalance.toStringAsFixed(8);
+                                      context.read<WithdrawCryptoBloc>().add(UpdateAmount(state.selectedCoinBalance));
                                     },
                                   )
                                 : null,
                           ),
                           onChanged: (value) {
                             final amount = double.tryParse(value) ?? 0.0;
-                            context.read<SellCryptoBloc>().add(UpdateAmount(amount));
+                            context.read<WithdrawCryptoBloc>().add(UpdateAmount(amount));
                           },
                         ),
                       ),
@@ -303,25 +291,64 @@ class _SellCryptoScreenContentState extends State<_SellCryptoScreenContent> {
                   ),
                 ),
                 Divider(color: Theme.of(context).colorScheme.darkTernary),
-                ListTile(
-                  title: const Text('You will receive'),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
+
+                // USD Value
+                if (state.amount > 0)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.blue.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.info_outline, color: Colors.blue, size: 16),
+                          const SizedBox(width: 8),
+                          Text(
+                            'USD Value: \$${state.usdValue.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                Divider(color: Theme.of(context).colorScheme.darkTernary),
+
+                // Адреса зовнішнього гаманця
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '\$${state.usdValue.toStringAsFixed(2)}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: state.usdValue > 0 ? Colors.green : Colors.grey,
-                        ),
+                        'External Wallet Address',
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
-                      const SizedBox(width: 10),
-                      const Text('USD'),
+                      const SizedBox(height: 8),
+                      TextField(
+                        controller: _addressController,
+                        enabled: !isLoading,
+                        decoration: InputDecoration(
+                          hintText: 'Enter destination wallet address',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          prefixIcon: const Icon(Icons.account_balance_wallet),
+                        ),
+                        onChanged: (value) {
+                          context.read<WithdrawCryptoBloc>().add(UpdateExternalAddress(value));
+                        },
+                      ),
                     ],
                   ),
                 ),
-                Divider(color: Theme.of(context).colorScheme.darkTernary),
               ],
             ),
           ),
@@ -330,15 +357,52 @@ class _SellCryptoScreenContentState extends State<_SellCryptoScreenContent> {
             padding: const EdgeInsets.all(16),
             child: PrimaryButton(
               isExpanded: true,
-              onPressed: isLoading || 
-                        state.amount <= 0 || 
-                        !state.hasEnoughCrypto ||
-                        _userId == null
+              onPressed: isLoading || !state.canWithdraw || _userId == null
                   ? null
                   : () {
-                      context.read<SellCryptoBloc>().add(
-                            SubmitSellOrder(userId: _userId!),
-                          );
+                      showDialog(
+                        context: context,
+                        builder: (dialogContext) => AlertDialog(
+                          title: const Text('Confirm Withdrawal'),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Amount: ${state.amount.toStringAsFixed(8)} ${state.selectedCoin.symbol}'),
+                              const SizedBox(height: 8),
+                              Text('USD Value: \$${state.usdValue.toStringAsFixed(2)}'),
+                              const SizedBox(height: 8),
+                              Text('To: ${state.externalAddress.length > 20 ? state.externalAddress.substring(0, 20) + "..." : state.externalAddress}'),
+                              const SizedBox(height: 16),
+                              const Text(
+                                'This action cannot be undone.',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(dialogContext),
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(dialogContext);
+                                context.read<WithdrawCryptoBloc>().add(
+                                      SubmitWithdrawOrder(userId: _userId!),
+                                    );
+                              },
+                              style: TextButton.styleFrom(
+                                foregroundColor: Colors.red,
+                              ),
+                              child: const Text('Withdraw'),
+                            ),
+                          ],
+                        ),
+                      );
                     },
               child: isLoading
                   ? const SizedBox(
@@ -349,7 +413,7 @@ class _SellCryptoScreenContentState extends State<_SellCryptoScreenContent> {
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                       ),
                     )
-                  : Text("Sell"),
+                  : const Text("Withdraw"),
             ),
           ),
         );

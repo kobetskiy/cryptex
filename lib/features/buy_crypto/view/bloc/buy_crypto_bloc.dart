@@ -46,8 +46,6 @@ class BuyCryptoBloc extends Bloc<BuyCryptoEvent, BuyCryptoState> {
       final balance = await repository.getUserBalance(event.userId);
       
       emit(state.copyWith(userBalance: balance));
-      
-      print('User USD balance loaded: \$${balance.toStringAsFixed(2)}');
     } catch (e) {
       print('Error loading user balance: $e');
     }

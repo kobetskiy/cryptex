@@ -1,22 +1,24 @@
 import 'package:equatable/equatable.dart';
 import '../../../buy_crypto/models/crypto_coin.dart';
 
-enum SellCryptoStatus { initial, loading, success, error }
+enum WithdrawCryptoStatus { initial, loading, success, error }
 
-class SellCryptoState extends Equatable {
-  final SellCryptoStatus status;
+class WithdrawCryptoState extends Equatable {
+  final WithdrawCryptoStatus status;
   final CryptoCoin selectedCoin;
   final double amount;
+  final String externalAddress;
   final Map<String, double> cryptoPrices;
   final Map<int, double> cryptoBalances;
   final String? errorMessage;
   final double? newBalance;
   final double userBalance;
 
-  const SellCryptoState({
-    this.status = SellCryptoStatus.initial,
+  const WithdrawCryptoState({
+    this.status = WithdrawCryptoStatus.initial,
     this.selectedCoin = CryptoCoin.bitcoin,
     this.amount = 0.0,
+    this.externalAddress = '',
     this.cryptoPrices = const {},
     this.cryptoBalances = const {},
     this.errorMessage,
@@ -25,9 +27,8 @@ class SellCryptoState extends Equatable {
   });
 
   double get usdValue {
-    final price = cryptoPrices[selectedCoin.symbol] ?? 0.0;
-    if (price == 0) return 0.0;
-    return amount * price;
+    final coinPrice = cryptoPrices[selectedCoin.symbol] ?? 0.0;
+    return amount * coinPrice;
   }
 
   double get selectedCoinBalance {
@@ -36,20 +37,27 @@ class SellCryptoState extends Equatable {
 
   bool get hasEnoughCrypto => amount <= selectedCoinBalance && amount > 0;
 
-  SellCryptoState copyWith({
-    SellCryptoStatus? status,
+  bool get canWithdraw => 
+      amount > 0 && 
+      externalAddress.isNotEmpty && 
+      hasEnoughCrypto;
+
+  WithdrawCryptoState copyWith({
+    WithdrawCryptoStatus? status,
     CryptoCoin? selectedCoin,
     double? amount,
+    String? externalAddress,
     Map<String, double>? cryptoPrices,
     Map<int, double>? cryptoBalances,
     String? errorMessage,
     double? newBalance,
     double? userBalance,
   }) {
-    return SellCryptoState(
+    return WithdrawCryptoState(
       status: status ?? this.status,
       selectedCoin: selectedCoin ?? this.selectedCoin,
       amount: amount ?? this.amount,
+      externalAddress: externalAddress ?? this.externalAddress,
       cryptoPrices: cryptoPrices ?? this.cryptoPrices,
       cryptoBalances: cryptoBalances ?? this.cryptoBalances,
       errorMessage: errorMessage,
@@ -63,6 +71,7 @@ class SellCryptoState extends Equatable {
         status,
         selectedCoin,
         amount,
+        externalAddress,
         cryptoPrices,
         cryptoBalances,
         errorMessage,

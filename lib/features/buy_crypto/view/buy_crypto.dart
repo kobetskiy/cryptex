@@ -155,22 +155,11 @@ class _BuyCryptoScreenContentState extends State<_BuyCryptoScreenContent> {
       builder: (context, state) {
         final isLoading = state.status == BuyCryptoStatus.loading;
         final currentPrice = state.cryptoPrices[state.selectedCoin.symbol] ?? 0.0;
-
-        // ДЕБАГ: Виводимо всі ціни в консоль
-        print('=== Current State Debug ===');
-        print('Status: ${state.status}');
-        print('Selected Coin: ${state.selectedCoin.name}');
-        print('All Prices: ${state.cryptoPrices}');
-        print('Current Price: $currentPrice');
-        print('Amount: ${state.amount}');
-        print('Cost: ${state.cost}');
-
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
             title: Text(S.of(context).buyCrypto),
             actions: [
-              // Кнопка для перезавантаження цін (для дебагу)
               IconButton(
                 icon: const Icon(Icons.refresh),
                 onPressed: () {
@@ -224,7 +213,6 @@ class _BuyCryptoScreenContentState extends State<_BuyCryptoScreenContent> {
                       ],
                     ),
                   ),
-                // Показуємо статус завантаження
                 if (isLoading)
                   const LinearProgressIndicator()
                 else if (state.cryptoPrices.isEmpty)

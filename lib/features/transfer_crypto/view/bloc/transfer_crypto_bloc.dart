@@ -96,7 +96,6 @@ class TransferCryptoBloc extends Bloc<TransferCryptoEvent, TransferCryptoState> 
     SubmitTransferOrder event,
     Emitter<TransferCryptoState> emit,
   ) async {
-    // Перевірка чи монети різні
     if (!state.coinsAreDifferent) {
       emit(
         state.copyWith(
@@ -106,8 +105,6 @@ class TransferCryptoBloc extends Bloc<TransferCryptoEvent, TransferCryptoState> 
       );
       return;
     }
-
-    // Перевірка чи є достатньо криптовалюти
     if (!state.hasEnoughCrypto) {
       emit(
         state.copyWith(
@@ -140,7 +137,6 @@ class TransferCryptoBloc extends Bloc<TransferCryptoEvent, TransferCryptoState> 
       );
 
       if (response.success) {
-        // Оновлюємо баланси після успішної конвертації
         final newBalance = response.newBalance ?? state.userBalance;
         final cryptoBalances = response.cryptoBalances ?? state.cryptoBalances;
         

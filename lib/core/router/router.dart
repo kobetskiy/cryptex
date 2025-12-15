@@ -14,6 +14,11 @@ import 'package:cryptex/features/settings/view/view.dart';
 import 'package:cryptex/features/support/view/support_screen.dart';
 import 'package:cryptex/features/sell_crypto/view/sell_crypto_screen.dart';
 import 'package:cryptex/features/transfer_crypto/view/transfer_crypto.dart';
+import 'package:cryptex/features/withdraw_funds/view/withdraw_funds_screen.dart';
+import 'package:cryptex/features/limit_orders/view/limit_orders_screen.dart';
+import 'package:cryptex/features/deposit_funds/view/deposit_funds_screen.dart';
+import 'package:cryptex/features/deposit_crypto/view/deposit_crypto_screen.dart';
+import 'package:cryptex/features/withdraw_crypto/view/withdraw_crypto_screen.dart';
 
 part 'router.gr.dart';
 
@@ -48,6 +53,11 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: SignUpRoute.page),
     AutoRoute(page: OnBoardingRoute.page),
     AutoRoute(page: SellCryptoRoute.page),
-    AutoRoute(page: ConvertCryptoRoute.page)
+    AutoRoute(page: ConvertCryptoRoute.page),
+    AutoRoute(page: WithdrawFundsRoute.page),
+    AutoRoute(page: LimitOrdersRoute.page),
+    AutoRoute(page: DepositFundsRoute.page),
+    AutoRoute(page: DepositCryptoRoute.page),
+    AutoRoute(page: WithdrawCryptoRoute.page),
   ];
 }
